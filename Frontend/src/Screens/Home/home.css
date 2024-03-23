@@ -16,6 +16,11 @@
     100% { transform: translateY(-40px); }
 }
 
+.text2{
+    color: aliceblue !important;
+    padding: 0rem 0.5rem 1rem 0.5rem ;
+}
+
 .gpt3__header {
     display: flex;
     flex-direction: row;
@@ -45,7 +50,7 @@
     line-height: 28px;
     color: var(--color-text);
 
-    margin-top: 1.5rem;
+    margin-top: 1rem;
 }
 
 .gpt3__header-content__input {
