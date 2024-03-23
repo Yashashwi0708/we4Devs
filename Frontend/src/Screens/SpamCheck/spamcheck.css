@@ -1,0 +1,55 @@
+.glass2{
+    display: flex;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    width: 100%;
+    height: 50px;
+    /* justify-content: center; */
+    align-items: center;
+    text-align: center;
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    font-family: 'Roboto', sans-serif;
+    /* box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px   rgba(0, 0, 0, 0.08); */
+}
+.num{
+    padding-bottom: 1rem;
+}
+.num input{
+    flex: 2;
+    width: 100%;
+    min-height: 50px;
+    font-family: var(--font-family);
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 28px;
+    background: var(--color-footer);
+    border: 2px solid var(--color-footer);
+    padding: 0 1rem;
+    outline: none;
+    color: #fff;
+    margin-bottom: 1rem;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+.num button{
+    flex: 0.6;
+    width: 50%;
+    min-height: 50px;
+    font-family: var(--font-family);
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 28px;
+    background: linear-gradient(to right,#122C6F, #11D9C5, #122C6F);
+    border: 2px solid #11D9C5;
+    padding: 0 1rem;
+    color: #fff;
+    cursor: pointer;
+    outline: none;
+    border-radius: 20px;
+    /* border-bottom-right-radius: 5px; */
+}
+.gradient__text{
+    padding-bottom: 2rem;
+}
