@@ -1,13 +1,15 @@
 const express = require('express');
 import('node-fetch');
 const bodyParser = require('body-parser'); // Import bodyParser for parsing request bodies
-
+//add cors
+const cors = require('cors');
 const { findAvailablePort, startContainer } = require('./container.js');
 
 const app = express();
 const port = 3000;
 
 // Middleware to parse JSON bodies
+app.use(cors());
 app.use(bodyParser.json());
 
 async function query(data) {
@@ -44,13 +46,14 @@ app.get('/startContainer', async (req, res) => {
     const port = await findAvailablePort(6800, 6900);
     const url = req.query.url || 'https://www.google.co.in';
     const pass = 'pass'
-    
+
     try {
         const containerId = await startContainer(port, url, pass);
-        res.send(`Container started with ID: ${containerId}. You can access it at https://localhost:${port}`);
+        res.send({ url: `https://localhost:${port}`, success: true });
     } catch (error) {
         res.status(500).send('Error starting container: ' + error.message);
     }
+    
 });
 
 app.listen(port, () => {

@@ -1,5 +1,6 @@
 from flask import Flask, request, jsonify
 from transformers import pipeline
+import subprocess
 
 app = Flask(__name__)
 
@@ -18,6 +19,34 @@ def check_spam():
         return jsonify({'is_Spam': False, 'probability': 1-result['score']})
     else:
         return jsonify({'is_Spam': True, 'probability': result['score']})
+
+
+@app.route('/startContainer', methods=['GET'])
+def start_container():
+    # Get parameters from the request
+    port = request.args.get('port')
+    url = request.args.get('url')
+    password = request.args.get('password')
+
+    # Define the Docker command
+    docker_command = [
+        "timeout", "5m",
+        "docker", "run", "--rm", "-it", "-d",
+        "--shm-size=512m", f"-p", f"{port}:6901",
+        "-e", f"VNC_PW={password}",
+        "-e", f"LAUNCH_URL={url}",
+        "kasmweb/chrome:1.14.0"
+    ]
+
+    process = subprocess.Popen(docker_command, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    stdout, stderr = process.communicate()
+
+    # Check if there was any error
+    if process.returncode != 0:
+        return jsonify({'status': 'Error', 'error_message': stderr.decode('utf-8')}), 500
+
+    return jsonify({'status': 'Container started successfully', 'output': stdout.decode('utf-8')})
+
 
 if __name__ == '__main__':
     app.run(debug=True)
