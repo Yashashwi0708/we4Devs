@@ -1,5 +1,6 @@
 const axios = require('axios');
-const { sendReply } = require('./reply')
+const { sendReply } = require('./reply');
+const e = require('express');
 const sendSpamTemplate = (phoneNumber, spamScore, detected = "Spam Content") => {
     return {
         "messaging_product": "whatsapp",
@@ -75,6 +76,14 @@ async function processMessage(message) {
     const response = await query({ input_text: message });
     return response
 }
+function isValidJson(str) {
+    try {
+        JSON.parse(str);
+        return true;
+    } catch (error) {
+        return false;
+    }
+}
 
 async function replyHandler(payload) {
     console.log(JSON.stringify(payload))
@@ -110,10 +119,10 @@ async function replyHandler(payload) {
     const messageBody = payload.entry?.[0]?.changes?.[0]?.value?.messages?.[0]?.text?.body ?? null;
 
     // Process the message
-    if (messageBody) {
+    if (isValidJson(messageBody)) {
         await processMessage(messageBody).then(
             (result) => {
-                let msgreply 
+                let msgreply
                 if (messageBody.length < 10) {
                     msgreply = `🔶 I am *SafeGuard*, your personal spam protection assistant.
 
@@ -135,20 +144,24 @@ async function replyHandler(payload) {
                 else if ((result.probability * 100).toFixed(2) > 50) {
                     msgreply = `⚠️ *Alert* ⚠️
 
-This message was assessed to be *${(result.probability * 100).toFixed(0)-Math.ceil(Math.random() * 5)}%* spam.
+This message was assessed to be *${(result.probability * 100).toFixed(0)}%* spam.
 
 ⛔️ Report it, and help keep others safe.
 
 🔷 _Visit us at https://safeguard.wcewlug.org_`
-                } else {
+                } else if ((result.probability * 100).toFixed(2) < 50) {
                     msgreply = `✅ *Safe* ✅
 
-This message was assessed to be *${100-(result.probability * 100).toFixed(0)-Math.ceil(Math.random() * 5)}%* safe.
+This message was assessed to be *${100 - (result.probability * 100).toFixed(0)}%* safe.
 
 👍 Good to go!
 
 🔷 _Visit us at https://safeguard.wcewlug.org_`
                 }
+                else {
+                    msgreply = `🤔Something went wrong, please try again...`
+                }
+
                 sendReply(phoneNumber, msgreply)
                 // sendSpamResponse(phoneNumber, (result.probability * 100).toString().slice(0, 5))
                 // console.log(phoneNumber, result);

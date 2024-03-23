@@ -5,7 +5,7 @@ const getInfoObj = async (number) => {
     const personData = await getInfo(number);
     return {
       statusCode: 200,
-      body: JSON.stringify(personData),
+      body: personData,
     };
   } catch (error) {
     console.error('Error getting phone number information:', error);
@@ -30,7 +30,7 @@ async function getInfo(number) {
     const searchData = {
       number: number,
       countryCode: 'IN',
-      installationId: 'a1i0N--lkjhjvV1k0eY-iA9S1BGQb-7FE2GJ2xiTQeqCJcyfifAxq7i3c7CBWIgw',
+      installationId: 'a1i0l--llL_Shk1kRBaiSUOCplN4RWSYj4tmn7gY8Cp6ze2hI1c35F31G7CDwmZ3',
     };
   
     // Search for the phone number
