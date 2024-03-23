@@ -15,10 +15,11 @@ const Navbar = () => {
     <div className="gpt3__navbar">
       <div className="gpt3__navbar-links">
         <div className="gpt3__navbar-links_container">
-          <p><a href='/' className='hover text-xl'>
+          {/* <p>
+            <a href='/' className='hover text-xl'>
             SafeGaurd
           </a>
-          </p>
+          </p> */}
           <Link to={'/checkspam '} className='hover'>
             <p>Spam Detect</p>
           </Link>
@@ -41,12 +42,12 @@ const Navbar = () => {
         </div>
       ) : (
         <div className="gpt3__navbar-sign">
-          <Link to={'login'}>
-            <button className='m-1' type="button">Sign in</button>
+          <Link to={'/'}>
+            <button className='m-1' type="button">SafeGuard</button>
           </Link>
-          <Link to={'signup'}>
+          {/* <Link to={'signup'}>
             <button className='m-1' type="button">Sign up</button>
-          </Link>
+          </Link> */}
         </div>
       )}
       <div className="gpt3__navbar-menu">

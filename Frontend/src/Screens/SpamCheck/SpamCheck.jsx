@@ -43,8 +43,8 @@ const SpamCheck = () => {
                                 </div>
                             </div>
 
-                            <div className="gpt3__header-image">
-                                <img style={{ scale: "0.8" }} src={spamCheck} />
+                            <div className="gpt3__header-image vert-move">
+                                <img style={{ scale: "1.25" }} src={spamCheck} />
                             </div>
                         </div>
                     </div> 
