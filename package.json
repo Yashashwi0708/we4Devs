@@ -1,10 +1,16 @@
 {
   "dependencies": {
     "cors": "^2.8.5",
+    "discord": "^0.8.2",
+    "discord.js": "^14.14.1",
     "dockerode": "^4.0.2",
+    "dotenv": "^16.4.5",
     "express": "^4.19.1",
     "node-fetch": "^3.3.2",
     "truecallerjs": "^2.2.0"
+    "node-fetch": "^3.3.2",
+    "nodemon": "^3.1.0",
+    "request": "^2.88.2"
   },
   "name": "we4devs",
   "description": "",
