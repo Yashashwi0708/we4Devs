@@ -9,7 +9,7 @@
 }
 .right{
     display: flex;
-    max-width: 48rem;
+    width: 48%;
     justify-content: center;    
     flex-direction: column;
 }
@@ -36,6 +36,7 @@
 .glass img {
     width: 40%;
     height: 100%;
+    /* max-height: 100%; */
     border-radius: 10px;
     scale: 1.5
 }

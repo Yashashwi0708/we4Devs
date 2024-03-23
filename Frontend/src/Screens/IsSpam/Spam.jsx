@@ -1,10 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
 import itisSpam from '../../../Assets/itisSpam.png';
 import './IsSpam.css';
-
+// function containsLink(text) {
+//   // Regular expression to match URLs
+  
+//   return;
+// }
 const Spam = (props) => {
-  console.log(props);
+  const text = props.str;
+  // console.log(props);
+  var urlRegex = /(http)/g;
 
+  // containsLink(text);
   const mp = new Map([
     ["randomly", 1],
     ["sweepstakes", 2],
@@ -22,7 +29,7 @@ const Spam = (props) => {
   ]);
 
   function highlight(para, mp) {
-    let highlightedText = para.replace(/\b\w+\b/g, function(word) {
+    let highlightedText = para.replace(/\b\w+\b/g, function (word) {
       const lowerWord = word.toLowerCase();
       if (mp.has(lowerWord)) {
         return `<span style="color:black; background-color: white;">${word}</span>`;
@@ -43,9 +50,18 @@ const Spam = (props) => {
         <div className='right'>
           <p style={{ color: '#FF203F' }}>This Message is Spam</p>
           {highlight(props.str, mp)}
-          <p>Link Detected</p>
-          <p>Open In Virtual Browser</p>
-          <button>Virtual Browser</button>
+
+          {
+            urlRegex.test(text) ? (
+              <>
+                <p>Link Detected</p>
+                <p>Open In Virtual Browser</p>
+                <button >Virtual Browser</button>
+              </>
+            ) : (
+              <p>No Link Detected</p>
+            )
+          }
         </div>
       </div>
     </div>

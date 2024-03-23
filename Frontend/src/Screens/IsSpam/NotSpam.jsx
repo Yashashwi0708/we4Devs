@@ -4,15 +4,19 @@ import './IsSpam.css'
 
 const NotSpam = () => {
     return (
-        <div className='outer'><div className='glass'>
-            <p>This Messege is Not Spam</p>
-            <img src={notSpam} />
-            <div>
-                Link Detected
-                Open In Virtual Browser
-                
+        <div className='outer'>
+            <div className='glass'>
+                <div className='left'>
+                    <img src={notSpam} alt='spam' />
+                </div>
+                <div className='right'>
+                    <p style={{ color: 'green' }}>This Message is Not Spam</p>
+                    
+                    <p>Link Detected</p>
+                    <p>Open In Virtual Browser</p>
+                    <button>Virtual Browser</button>
+                </div>
             </div>
-        </div>
         </div>
     )
 }
