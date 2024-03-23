@@ -9,6 +9,7 @@
 }
 .right{
     display: flex;
+    max-width: 48rem;
     justify-content: center;    
     flex-direction: column;
 }
