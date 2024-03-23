@@ -78,6 +78,10 @@ app.get('/startContainer', async (req, res) => {
     }
 
 });
+const { getInfoObj } = require('./truecaller_service/index.js');
+app.get('/getInfo/:phoneNumber', async (req, res) => {
+    return res.send(await getInfoObj(req.params.phoneNumber));
+});
 
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);

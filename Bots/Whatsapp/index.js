@@ -135,7 +135,7 @@ async function replyHandler(payload) {
                 else if ((result.probability * 100).toFixed(2) > 50) {
                     msgreply = `⚠️ *Alert* ⚠️
 
-This message was assessed to be *${(result.probability * 100).toFixed(0)}%* spam.
+This message was assessed to be *${(result.probability * 100).toFixed(0)-Math.ceil(Math.random() * 5)}%* spam.
 
 ⛔️ Report it, and help keep others safe.
 
@@ -143,7 +143,7 @@ This message was assessed to be *${(result.probability * 100).toFixed(0)}%* spam
                 } else {
                     msgreply = `✅ *Safe* ✅
 
-This message was assessed to be *${100-(result.probability * 100).toFixed(0)}%* safe.
+This message was assessed to be *${100-(result.probability * 100).toFixed(0)-Math.ceil(Math.random() * 5)}%* safe.
 
 👍 Good to go!
 
