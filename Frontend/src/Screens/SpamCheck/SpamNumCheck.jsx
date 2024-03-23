@@ -23,6 +23,7 @@ const SpamNumCheck = () => {
             <div className="gpt3__header section__padding" id="home">
                 <div className="gpt3__header-content">
                     <h1 className="gradient__text">Check Spam Number</h1>
+                    <p className='text2'>Easily retrieve user details using their phone number <br/> Powered by <span style={{color:'#2589ff',backgroundColor:'aliceblue', padding:'0 0.55rem 0 0.45rem', borderRadius:'5px'}}>Truecaller</span></p>
                     <div className="num">
                         <input type="text" placeholder="Enter Phone Number " onChange={handleChange} />
                         <button type="button" onClick={handleSubmit}>Submit</button>
