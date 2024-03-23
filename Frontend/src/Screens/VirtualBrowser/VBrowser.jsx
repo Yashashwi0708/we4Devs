@@ -1,10 +1,12 @@
 import React from 'react';
 import './vbrowser.css';
-const VBrowser = () => {
+const VBrowser = (props) => {
+  const url = props.url || 'https://leetcode.com/jyot_150/';
+  console.log(url);
   return (
     <>
       <div className='outer'>
-        <iframe className='iframe' src="https://10.40.11.12:6800" title="Virtual Browser" />
+        <iframe className='iframe' src={url} title="Virtual Browser" />
       </div>
     </>
   );

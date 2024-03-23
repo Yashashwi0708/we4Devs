@@ -1,17 +1,27 @@
 import React, { useState } from 'react';
 import itisSpam from '../../../Assets/itisSpam.png';
 import './IsSpam.css';
-// function containsLink(text) {
-//   // Regular expression to match URLs
-  
-//   return;
-// }
+import axios from 'axios';
+import VBrowser from './../VirtualBrowser/VBrowser';
+
 const Spam = (props) => {
+  const [url, setUrl] = useState('');
   const text = props.str;
-  // console.log(props);
   var urlRegex = /(http)/g;
 
-  // containsLink(text);
+  const [link, setLink] = useState('');
+  const handlechange = (e) => {
+    setLink(e.target.value);
+  }
+  const handleClick = async () => {
+    const getReqLink = `http://10.40.11.12:3000/startContainer?url=${link}`
+    console.log(getReqLink);
+    const res = await axios.get(getReqLink)
+    const tempPORT = res.data.url;
+    const port = tempPORT[18]+tempPORT[19]+tempPORT[20]+tempPORT[21];
+    setUrl(`https://10.40.11.12:${port}`);
+  }
+
   const mp = new Map([
     ["randomly", 1],
     ["sweepstakes", 2],
@@ -42,28 +52,34 @@ const Spam = (props) => {
   }
 
   return (
-    <div className='outer'>
-      <div className='glass'>
-        <div className='left'>
-          <img src={itisSpam} alt='spam' />
-        </div>
-        <div className='right'>
-          <p style={{ color: '#FF203F' }}>This Message is Spam</p>
-          {highlight(props.str, mp)}
+    <div>
 
-          {
-            urlRegex.test(text) ? (
-              <>
-                <p>Link Detected</p>
-                <p>Open In Virtual Browser</p>
-                <button >Virtual Browser</button>
-              </>
-            ) : (
-              <p>No Link Detected</p>
-            )
-          }
+      <div className='outer'>
+        <div className='glass'>
+          <div className='left'>
+            <img src={itisSpam} alt='spam' />
+          </div>
+          <div className='right'>
+            <p style={{ color: '#FF203F' }}>This Message is Spam</p>
+            {highlight(props.str, mp)}
+
+            {
+              urlRegex.test(text) ? (
+                <>
+                  <p>Link Detected</p>
+                  <input placeholder='Enter that link' onChange={handlechange} />
+                  <p>Open In Virtual Browser</p>
+                  <button onClick={handleClick} >Virtual Browser</button>
+                </>
+              ) : (
+                <p>No Link Detected</p>
+              )
+            }
+          </div>
         </div>
-      </div>
+      </div>{
+        url === '' ? null : <VBrowser url={url} />
+      }
     </div>
   );
 };
