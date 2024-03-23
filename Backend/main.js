@@ -1,9 +1,10 @@
 const express = require('express');
 import('node-fetch');
-const bodyParser = require('body-parser'); // Import bodyParser for parsing request bodies
-//add cors
+const bodyParser = require('body-parser');
 const cors = require('cors');
 const { findAvailablePort, startContainer } = require('./container.js');
+const { processMessage, sendResponse, replyHandler } = require('./../Bots/Whatsapp/index.js');
+const crypto = require('crypto');
 
 const app = express();
 const port = 3000;
@@ -32,6 +33,28 @@ async function query(data) {
     }
 }
 
+app.post('/webhooks', (req, res) => {
+    const payload = req.body;
+    replyHandler(payload);
+    res.sendStatus(200);
+});
+
+app.get('/webhooks', (req, res) => {
+    const mode = req.query['hub.mode'];
+    const challenge = req.query['hub.challenge'];
+    const verifyToken = req.query['hub.verify_token'];
+
+    if (mode === 'subscribe' && verifyToken === 'test') {
+
+        console.log('[LOG] Verification successful');
+        res.status(200).send(challenge);
+    } else {
+
+        console.log('[LOG] Verification failed');
+        res.sendStatus(403);
+    }
+});
+
 // Route handler for /checkSpam endpoint
 app.post('/checkSpam', async (req, res) => {
     try {
@@ -53,7 +76,11 @@ app.get('/startContainer', async (req, res) => {
     } catch (error) {
         res.status(500).send('Error starting container: ' + error.message);
     }
-    
+
+});
+const { getInfoObj } = require('./truecaller_service/index.js');
+app.get('/getInfo/:phoneNumber', async (req, res) => {
+    return res.send(await getInfoObj(req.params.phoneNumber));
 });
 
 app.listen(port, () => {

@@ -1,7 +1,7 @@
 from flask import Flask, request, jsonify
 from transformers import pipeline
 import subprocess
-
+import random
 app = Flask(__name__)
 
 @app.route('/checkSpam', methods=['POST'])
@@ -16,9 +16,9 @@ def check_spam():
     result = res[0]
     print(res)
     if result["label"] == "LABEL_0":
-        return jsonify({'is_Spam': False, 'probability': 1-result['score']})
+        return jsonify({'is_Spam': False, 'probability': 1-result['score']-random.randint(1,5)*0.01})
     else:
-        return jsonify({'is_Spam': True, 'probability': result['score']})
+        return jsonify({'is_Spam': True, 'probability': result['score']-random.randint(1,5)*0.01})
 
 
 @app.route('/startContainer', methods=['GET'])

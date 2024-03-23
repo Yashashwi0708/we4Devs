@@ -14,6 +14,6 @@
     Spam Score: [Score between 0-1, where 0 is not spam and 1 is definite spam Or in %]
     [Interpretation based on the score, e.g., "This message is likely spam" or "This message does not appear to be spam"]
 
-/redirect: Provide the URL to the SafeGuard website.
+/thankyou: Provide the URL to the SafeGuard website.
     Visit our website, SafeGuard.com, for more information about our spam protection services and resources.
     SafeGuard.com
