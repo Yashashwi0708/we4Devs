@@ -9,7 +9,7 @@
 }
 .right{
     display: flex;
-    justify-content: center;
+    justify-content: center;    
     flex-direction: column;
 }
 .glass{
