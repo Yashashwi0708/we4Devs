@@ -39,7 +39,7 @@ const SpamCheck = () => {
                                 <p className='text2'>Feel confident knowing that our advanced security system is diligently analyzing messages and links to protect you from potential threats</p>
                                 <textarea className='glass2' type="text" placeholder="Enter the text here" onChange={handleText} />
                                 <div className="gpt3__header-content__input">
-                                    <button type="button" onClick={handleClick}>Share to us</button>
+                                    <button type="button" onClick={handleClick} style={{fontSize:"1.35rem"}}>Submit</button>
                                 </div>
                             </div>
 

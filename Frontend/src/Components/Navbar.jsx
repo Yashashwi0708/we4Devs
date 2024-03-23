@@ -30,8 +30,9 @@ const Navbar = () => {
             <p>Spammer Detection</p>
           </Link>
           <p style={{color:"red"}}>What is Spam?</p>
-          <p><a href="https://github.com/Yashashwi0708/we4Devs" className='hover'>Github</a></p>
-          <p><a href="" className='hover'>About Us</a></p>
+          <a href="https://github.com/Yashashwi0708/we4Devs" className='hover'><p>Github</p></a>
+          <p>About Us</p>
+          {/* <p><a href="" className='hover'>About Us</a></p> */}
 
 
         </div>
@@ -43,7 +44,7 @@ const Navbar = () => {
       ) : (
         <div className="gpt3__navbar-sign">
           <Link to={'/'}>
-            <button className='m-1' type="button">SafeGuard</button>
+            <button className='m-1' type="button" style={{fontWeight:'600'}}>SafeGuard</button>
           </Link>
           {/* <Link to={'signup'}>
             <button className='m-1' type="button">Sign up</button>

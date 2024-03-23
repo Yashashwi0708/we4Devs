@@ -3,19 +3,20 @@ import spamCheck from '../../../Assets/spamCheck.png';
 
 const SpamNumCheck = () => {
     const [number, setNumber] = useState('');
-    const [res, setRes] = useState({}); // will be an object with detail of number 
-    const handleSubmit = () => {
-        fetch('10.40.11.12:3000/checkSpam', {
-            method: 'POST',
+
+    const handleSubmit = async () => {
+        await fetch(`http://10.40.11.12:3000/getInfo/${number}`, {
+            method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ number: number })
-        }).then(res => res.json())
+        }).then(res => {
+            console.log(res.json())
+        })
     }
+
     const handleChange = (e) => {
         setNumber(e.target.value);
-        console.log(number);
     }
 
     return (
