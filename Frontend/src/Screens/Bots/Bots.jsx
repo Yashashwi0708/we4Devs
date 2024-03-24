@@ -8,22 +8,22 @@ function Bots() {
   return (
     <div className='outer'>
       <div className='container'>
-        <div className='left'>
+        <div className='chi glass2'>
           <img src={whastapp} alt='WhatsApp' />
-          <h1>WhatsApp Bot</h1>
-          <p>Powered by Safe Guard</p>
-          <a href='' target='_blank' rel='noreferrer' style={{color:"white"}}>Add to WhatsApp</a>
+          <h1 className='gradient__text' style={{fontSize:'1.6rem'}}>WhatsApp Bot</h1>
+          <p>Powered by SafeGuard</p>
+          <a href='https://wa.me/+15550389815' target='_blank' rel='noreferrer' style={{color:"white"}}>Add to WhatsApp</a>
         </div>
-        <div className='center'>
+        <div className='chi glass2'>
           <img src={telegram} alt='Telegram' />
-          <h1>Telegram Bot</h1>
-          <p>Powered by Safe Guard</p>
+          <h1 className='gradient__text' style={{fontSize:'1.6rem'}}>Telegram Bot</h1>
+          <p>Powered by SafeGuard</p>
           <a href='' target='_blank' rel='noreferrer' style={{color:"white"}}>Add to Telegram</a>
         </div>
-        <div className='right'>
-          <img src={discord} alt='Discord' style={{ scale: "1.2" }} />
-          <h1>Discord Bot</h1>
-          <p>Powered by Safe Guard</p>
+        <div className='chi glass2'>
+          <img src={discord} alt='Discord'/>
+          <h1 className='gradient__text' style={{fontSize:'1.6rem'}}>Discord Bot</h1>
+          <p>Powered by SafeGuard</p>
           <a href='' target='_blank' rel='noreferrer' style={{color:"white"}}>Add to Discord</a>
         </div>
       </div>
