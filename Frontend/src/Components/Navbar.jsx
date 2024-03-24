@@ -32,10 +32,17 @@ const Navbar = () => {
           <Link to={'/bots'} className='hover'>
             <p>Bots</p>
           </Link>
-          <p style={{ color: "red" }}>What is Spam?</p>
+          
+          <Link to = {'/whatisspam'} className='hover'>
+            <p style={{ color: "red" }}>What is Spam?</p>
+          </Link>
+
           <a href="https://github.com/Yashashwi0708/we4Devs" className='hover'><p>Github</p></a>
-          <p>About Us</p>
+          {/* <p>About Us</p> */}
           {/* <p><a href="" className='hover'>About Us</a></p> */}
+          <Link to={'/aboutus'} className='hover'>
+            <p>About Us</p>
+          </Link>
 
         </div>
       </div>
@@ -72,7 +79,12 @@ const Navbar = () => {
               <Link to={"/spamnumber"} className='hover'>
                 <p>Check Phone</p>
               </Link>
+
+            
+
               <p style={{ color: "red" }}>What is Spam?</p>
+              
+              
               <a href="https://github.com/Yashashwi0708/we4Devs" className='hover'><p>Github</p></a>
               <p>About Us</p>
             </div>

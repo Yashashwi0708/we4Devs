@@ -8,6 +8,8 @@ import SpamCheck from './Screens/SpamCheck/SpamCheck';
 import SpamNumCheck from './Screens/SpamCheck/SpamNumCheck';
 import VBrowser from './Screens/VirtualBrowser/VBrowser';
 import Bots from './Screens/Bots/Bots';
+import AboutUs from './Screens/AboutUs/AboutUs';
+import WhatIsSpam from './Screens/WhatIsSpam/WhatIsSpam';
 
 function App() {
   return (
@@ -21,6 +23,8 @@ function App() {
           <Route path='/spamnumber' element={<SpamNumCheck />} />
           <Route path='/vbrowser' element={<VBrowser />} />
           <Route path='/bots' element={<Bots />} />
+          <Route path='/aboutus' element={<AboutUs />} />
+          <Route path='/whatisspam' element={<WhatIsSpam />} />
         </Routes>
       </Router>
     </>
