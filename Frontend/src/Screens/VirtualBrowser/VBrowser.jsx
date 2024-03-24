@@ -12,7 +12,7 @@ const VBrowser = (props) => {
 
   const handleSubmit = async () => {
     try {
-      const response = await fetch(`${process.env.HOSTADRR}/startContainer?url=${url}`, {
+      const response = await fetch(`http://10.40.11.12:3000/startContainer?url=${url}`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json'
