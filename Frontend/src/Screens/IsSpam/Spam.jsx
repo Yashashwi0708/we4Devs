@@ -20,9 +20,8 @@ const Spam = (props) => {
     const getReqLink = `http://10.40.11.12:3000/startContainer?url=${link}`
     console.log(getReqLink);
     const res = await axios.get(getReqLink)
-    const tempPORT = res.data.url;
-    const port = tempPORT[18] + tempPORT[19] + tempPORT[20] + tempPORT[21];
-    setUrl(`https://10.40.11.12:${port}`);
+    const tempUrl = res.data.url;
+    return setUrl(tempUrl);
   }
 
   const mp = new Map([
@@ -70,8 +69,7 @@ const Spam = (props) => {
             <div className='score red'>{(100 - (props.score.toFixed(3)))}%</div>
 
             <p >This Message is Spam</p>
-
-
+            
             {
               urlRegex.test(text) ? (
                 <>
