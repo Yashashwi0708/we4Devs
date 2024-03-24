@@ -4,6 +4,8 @@ import axios from 'axios';
 const SpamNumCheck = () => {
     const [number, setNumber] = useState('');
     const [info, settInfo] = useState('')
+    const [fnum, setFnum] = useState('')
+    let num = null;
     console.log(info);
     const handleSubmit = async () => {
         console.log('here');
@@ -15,19 +17,35 @@ const SpamNumCheck = () => {
         }).then(res => {
             console.log(res.data.body);
             settInfo(res.data.body);
+            setFnum(number);
         })
     }
 
     const handleChange = (e) => {
         setNumber(e.target.value);
-        console.log(number);
     }
-
+    let regionNames = new Intl.DisplayNames(['en'], {type: 'region'});
+    function blurEmail(email) {
+        var parts = email.split('@');
+        if (parts.length !== 2) {
+          return email;
+        }
+      
+        var username = parts[0];
+        var domain = parts[1];
+      
+        if (username.length < 4) {
+          return email;
+        }
+        var blurredUsername = username.substring(0, username.length - 3) + '***';
+      
+        return blurredUsername + '@' + domain;
+      }
     return (
         <div>
             <div className="gpt3__header section__padding" id="home">
                 <div className="gpt3__header-content">
-                    <h1 className="gradient__text">Check Spam Number</h1>
+                    <h1 className="gradient__text">Check Phone Info</h1>
                     <p className='text2'>Easily retrieve user details using their phone number <br /> Powered by <span style={{ color: '#2589ff', backgroundColor: 'aliceblue', padding: '0 0.35rem 0 0.25rem', borderRadius: '5px', fontWeight: '600' }}>Truecaller</span></p>
                     <div className="num">
                         <input type="text" placeholder="Enter Phone Number " onChange={handleChange} />
@@ -40,21 +58,30 @@ const SpamNumCheck = () => {
                     </div>)
                 }
                 {info && (
-                    <div className="gpt3__header-image">
+                    <div className="gpt3__header-image glass" style={{display:'flex', flexDirection:'column'}}>
+                   
+                        
                         <table className="info">
-                            <caption>Information</caption>
                             <tbody>
                                 <tr>
-                                    <th>Name</th>
+                                    <th>Name:</th>
                                     <td>{info.name}</td>
                                 </tr>
                                 <tr>
-                                    <th>Country</th>
-                                    <td>{info.country}</td>
+                                    <th>Email:</th>
+                                    <td>{blurEmail(info.email)}</td>
                                 </tr>
                                 <tr>
-                                    <th>RuleName</th>
-                                    <td>{info.ruleName}</td>
+                                    <th>Phone:</th>
+                                    <td>{fnum}</td>
+                                </tr>
+                                <tr>
+                                    <th>Country:</th>
+                                    <td>{regionNames.of(info.country)}</td>
+                                </tr>
+                                <tr>
+                                    <th>RuleName:</th>
+                                    <td>{info.ruleName? info.ruleName: "-"}</td>
                                 </tr>
                                 <tr>
                                     <th>Carrier</th>

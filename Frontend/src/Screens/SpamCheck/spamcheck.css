@@ -99,3 +99,30 @@
   .info table tr:hover {
     background-color: #ddd;
   }
+/* CSS for the table */
+.info {
+  width: 100%;
+  border-collapse: collapse;
+  color: #fff; /* Text color for better visibility on dark background */
+}
+
+/* CSS for table headers */
+.info th {
+  padding: 12px;
+  background-color: #333; /* Dark background color */
+  border-bottom: 2px solid #ddd;
+}
+
+/* CSS for table cells */
+.info td {
+  padding: 12px;
+  border-bottom: 1px solid #ddd;
+}
+
+/* Alternate row color */
+.info tr:nth-child(odd) {
+  background-color: #444; /* Darker alternate row color */
+}
+.info tr:nth-child(even) {
+  background-color: #444; /* Darker alternate row color */
+}

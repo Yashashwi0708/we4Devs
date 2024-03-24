@@ -68,7 +68,7 @@ app.post('/checkSpam', async (req, res) => {
 app.get('/startContainer', async (req, res) => {
     const port = await findAvailablePort(6800, 6900);
     const url = req.query.url || 'https://www.google.co.in';
-    const pass = 'pass'
+    const pass = 'password'
 
     try {
         const containerId = await startContainer(port, url, pass);

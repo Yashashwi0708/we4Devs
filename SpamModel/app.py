@@ -33,7 +33,7 @@ def start_container():
     docker_command = [
         "timeout", "5m",
         "docker", "run", "--rm", "-it", "-d",
-        "--shm-size=512m", f"-p", f"{port}:6901",
+        "--shm-size=256m", f"-p", f"{port}:6901",
         "-e", f"VNC_PW={password}",
         "-e", f"LAUNCH_URL={url}",
         "kasmweb/chrome:1.14.0"
