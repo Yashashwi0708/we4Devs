@@ -13,10 +13,10 @@ const AboutUs = () => {
             <p className="text2">We are altogether the students of Walchand College Of Enginnering, Sangli</p>
             
             <p className="text2">We are Team <b>we4Devs</b></p>
-            <p >Yashashwi Patil</p>
-            <p >Jyotiraditya Patil</p>
-            <p >Smit Butle</p>
-            <p >Siddhesh Kitkaru</p>
+            <p ><a href='https://www.linkedin.com/in/yashashwi-patil-95b824225/'>Yashashwi Patil</a></p>
+            <p ><a href='https://www.linkedin.com/in/jyotiraditya-patil-996933230/'>Jyotiraditya Patil</a></p>
+            <p ><a href='https://www.linkedin.com/in/smit-butle-17ba97240/'>Smit Butle</a></p>
+            <p ><a href='https://www.linkedin.com/in/siddheshkitkaru/'>Siddhesh Kitkaru</a></p>
 
             <div className="gpt3__header-contFeel confident knowing that our advanced security system is diligently analyzing messages and links to protect you from potential threatsent__input">
             </div>
