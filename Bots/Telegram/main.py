@@ -6,7 +6,7 @@ from telegram.ext import ApplicationBuilder, MessageHandler, filters, ContextTyp
 # Constants
 TOKEN: Final = '6343701605:AAHB38P9f2AqD-RMxKxP5XUGVWVcHcleook'
 BOT_USERNAME: Final = '@SafeGuradBot'
-WEBSITE_URL: Final = 'https://SafeGuard.wce.wlug.org'  # Replace with your website URL
+WEBSITE_URL: Final = 'https://SafeGuard.wce.wlug.org'  
 
 # Responses
 async def handle_response(text: str, update: Update, context: ContextTypes.DEFAULT_TYPE) -> str:
@@ -40,7 +40,7 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
         [InlineKeyboardButton("Visit", callback_data='visit')],
     ]
     reply_markup = InlineKeyboardMarkup(keyboard)
-    await update.message.reply_text(f'Hello, I am {BOT_USERNAME}! What do you want to do?', reply_markup=reply_markup)
+    await update.message.reply_text(f'Hello, I am {BOT_USERNAME}! What do you want to check?', reply_markup=reply_markup)
 
 async def message_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
     context.user_data['waiting_for_message'] = True
@@ -77,6 +77,7 @@ async def handle_number_message(update: Update, context: ContextTypes.DEFAULT_TY
         else:
             formatted_response += "score: Standard information available\n"
         formatted_response += f"ruleName: {data.get('ruleName', 'N/A')}"
+        update.message.reply_text("Processing your number...")
         await update.message.reply_text(formatted_response)
     else:
         await update.message.reply_text("No information available for the provided number.")
@@ -90,7 +91,16 @@ async def handle_text_message(update: Update, context: ContextTypes.DEFAULT_TYPE
     print(f'User ({update.message.chat.id}) in {message_type} said: {text}')
     if 'waiting_for_message' in context.user_data and context.user_data['waiting_for_message']:
         context.user_data['waiting_for_message'] = False
-        await update.message.reply_text(f"I got your message: {text}")
+        payload = {
+            "input_text": text
+        }
+        url = "http://10.40.11.12:3000/checkSpam"
+        response = requests.post(url, json=payload).json()
+        is_spam = response.get("is_Spam", False)
+        probability = response.get("probability", 0.0) * 100
+        formatted_response = f"Spam: {'Yes' if is_spam else 'No'}\nProbability: {probability:.2f}%"
+        update.message.reply_text("Processing your message...")
+        await update.message.reply_text(formatted_response)
     else:
         response: str = await handle_response(text, update, context)  # Await the handle_response coroutine
         print(f'{BOT_USERNAME} responded with: {response}')
