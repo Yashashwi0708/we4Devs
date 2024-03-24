@@ -39,7 +39,55 @@ const Spam = (props) => {
     ["social", 12],
     ["credit", 13],
     ["free", 14],
+    ["offer", 15],
+    ["promotion", 16],
+    ["win", 17],
+    ["prize", 18],
+    ["claim", 19],
+    ["exclusive", 20],
+    ["discount", 21],
+    ["sale", 22],
+    ["deal", 23],
+    ["cash", 24],
+    ["money", 25],
+    ["voucher", 26],
+    ["guaranteed", 27],
+    ["special", 28],
+    ["limited time", 29],
+    ["discounted", 30],
+    ["bonus", 31],
+    ["reward", 32],
+    ["save", 33],
+    ["offer ends soon", 34],
+    ["click now", 35],
+    ["reply", 36],
+    ["subscribe", 37],
+    ["unsubscribe", 38],
+    ["winning", 39],
+    ["cash prize", 40],
+    ["easy money", 41],
+    ["earn", 42],
+    ["enter now", 43],
+    ["instant", 44],
+    ["jackpot", 45],
+    ["millionaire", 46],
+    ["claim your prize", 47],
+    ["limited offer", 48],
+    ["get rich", 49],
+    ["act fast", 50],
+    ["best offer", 51],
+    ["only today", 52],
+    ["double your", 53],
+    ["triple your", 54],
+    ["money back", 55],
+    ["refund", 56],
+    ["unbeatable offer", 57],
+    ["check now", 58],
+    ["confirm", 59],
+    ["verify", 60]
   ]);
+
+
 
   function highlight(para, mp) {
     let highlightedText = para.replace(/\b\w+\b/g, function (word) {
@@ -62,26 +110,26 @@ const Spam = (props) => {
         <div className='glass'>
 
           <div className='left'>
-            <img src={itisSpam} alt='spam' style={{position:'relative', zIndex:-1}}/>
+            <img src={itisSpam} alt='spam' style={{ position: 'relative', zIndex: -1 }} />
             <p className='text3'>{highlight(props.str, mp)}</p>
           </div>
           <div className='right '>
             <div className='score red'>{(100 - (props.score.toFixed(3)))}%</div>
 
             <p >This Message is Spam</p>
-            
+
             {
               urlRegex.test(text) ? (
                 <>
-                  <p>Link Detected {text.match(urlRegex)[0]} <br/></p>
+                  <p>Link Detected {text.match(urlRegex)[0]} <br /></p>
                   <button onClick={handleClick} >Open Virtual Browser</button>
 
                   <button className='button' onClick={() => props.setResult('')}>Go Back</button>
                 </>
               ) : (
                 <>
-                <p>No Link Detected</p>
-                <button className='button' onClick={() => props.setResult('')}>Go Back</button>
+                  <p>No Link Detected</p>
+                  <button className='button' onClick={() => props.setResult('')}>Go Back</button>
                 </>
               )
             }
