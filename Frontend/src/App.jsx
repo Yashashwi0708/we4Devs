@@ -27,7 +27,6 @@ function App() {
           <Route path='/aboutus' element={<AboutUs />} />
           <Route path='/whatisspam' element={<WhatIsSpam />} />
         </Routes>
-        <Footer />
       </Router>
     </>
   );

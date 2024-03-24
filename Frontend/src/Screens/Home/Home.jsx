@@ -3,6 +3,7 @@ import boxLock from '../../../Assets/boxLock.png';
 import spamCheck from '../../../Assets/spamCheck.png';
 import './home.css';
 import { Link } from 'react-router-dom';
+import Footer from '../../Components/Footer';
 const Home = () => {
   return (
     <>
@@ -24,6 +25,7 @@ const Home = () => {
           </div>
         </div>
       </div>
+      <Footer/>
 
     </>
   )
