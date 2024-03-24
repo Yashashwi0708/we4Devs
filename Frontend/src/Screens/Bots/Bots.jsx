@@ -18,13 +18,13 @@ function Bots() {
           <img src={telegram} alt='Telegram' />
           <h1 className='gradient__text' style={{fontSize:'1.6rem'}}>Telegram Bot</h1>
           <p>Powered by SafeGuard</p>
-          <a href='' target='_blank' rel='noreferrer' style={{color:"white"}}>Add to Telegram</a>
+          <a href='https://t.me/SafeGuradBot' target='_blank' rel='noreferrer' style={{color:"white"}}>Add to Telegram</a>
         </div>
         <div className='chi glass2'>
           <img src={discord} alt='Discord'/>
           <h1 className='gradient__text' style={{fontSize:'1.6rem'}}>Discord Bot</h1>
           <p>Powered by SafeGuard</p>
-          <a href='' target='_blank' rel='noreferrer' style={{color:"white"}}>Add to Discord</a>
+          <a href='https://discord.com/oauth2/authorize?client_id=1221061876310474843&permissions=8&scope=bot' target='_blank' rel='noreferrer' style={{color:"white"}}>Add to Discord</a>
         </div>
       </div>
     // </div>
