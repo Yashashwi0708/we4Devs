@@ -37,7 +37,7 @@ const Navbar = () => {
             <p style={{ color: "red" }}>What is Spam?</p>
           </Link>
 
-          <a href="https://github.com/Yashashwi0708/we4Devs" className='hover'><p>Github</p></a>
+          <a href="https://github.com/Yashashwi0708/we4Devs" className='hover' target='_blank'><p>Github</p></a>
           {/* <p>About Us</p> */}
           {/* <p><a href="" className='hover'>About Us</a></p> */}
           <Link to={'/aboutus'} className='hover'>
@@ -82,7 +82,7 @@ const Navbar = () => {
 
             
 
-              <p style={{ color: "red" }}>What is Spam?</p>
+              <p>What is Spam?</p>
               
               
               <a href="https://github.com/Yashashwi0708/we4Devs" className='hover'><p>Github</p></a>
