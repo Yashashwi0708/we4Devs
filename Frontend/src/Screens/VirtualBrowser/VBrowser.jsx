@@ -2,7 +2,7 @@
 import './vbrowser.css';
 
 import React, { useState, useEffect } from 'react'
-import spamCheck from '../../../Assets/spamCheck.png';
+import spamCheck from '../../../Assets/disposableBrowsers.png';
 
 const VBrowser = (props) => {
   const [url, setURL] = useState('');

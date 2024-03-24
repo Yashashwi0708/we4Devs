@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import spamCheck from '../../../Assets/spamCheck.png';
+import spamCheck from '../../../Assets/jyot.png';
 import '../Home/home.css';
 import './spamcheck.css';
 import axios from 'axios';
