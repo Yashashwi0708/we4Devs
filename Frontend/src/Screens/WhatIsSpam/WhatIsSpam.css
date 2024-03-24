@@ -1,0 +1,31 @@
+.what-is-spam {
+    max-width: 800px;  /* Set a maximum width for the content container */
+    margin: 0 auto;  /* Center the content horizontally */
+    padding: 2rem;  /* Add some padding for readability */
+    font-family: Arial, sans-serif;  /* Set a basic font */
+  }
+  
+  .what-is-spam h2 {
+    margin-bottom: 1rem;  /* Add some space below the heading */
+    font-size: 1.5rem;  /* Increase heading font size slightly */
+    color: white
+  }
+  
+  .what-is-spam p {
+    line-height: 1.5;  /* Increase line spacing for easier reading */
+    margin-bottom: 1rem;  /* Add some space between paragraphs */
+    color: white;
+  }
+  
+  .what-is-spam h3 {
+    margin-top: 1.5rem;  /* Add space above subheadings */
+    margin-bottom: 0.5rem;  /* Add some space below subheadings */
+    color: white;
+  }
+  
+  .what-is-spam ul {
+    list-style: disc;  /* Use disc bullets for lists */
+    padding-left: 1rem;  /* Indent the list items */
+    color: wheat;
+  }
+  
