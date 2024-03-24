@@ -24,8 +24,11 @@ const VBrowser = (props) => {
       }
 
       const data = await response.json();
+      lolcahost:3000
       console.log(data); // Make sure the data received is what you expect
-      setResp(data.url);
+      const port = data.url[18]+data.url[19]+data.url[20]+data.url[21];
+      const new_url = `https://10.40.11.12:${port}`;
+      setResp(new_url);
       setTimerActive(true);
     } catch (error) {
       console.error('Error:', error);
