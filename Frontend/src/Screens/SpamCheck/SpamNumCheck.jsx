@@ -1,7 +1,5 @@
 import React, { useState } from 'react'
 import spamCheck from '../../../Assets/spamCheck.png';
-import { Portal } from 'react-portal';
-import { PortalWithState } from 'react-portal';
 import axios from 'axios';
 const SpamNumCheck = () => {
     const [number, setNumber] = useState('');
