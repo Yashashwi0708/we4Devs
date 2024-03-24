@@ -17,7 +17,7 @@ const Spam = (props) => {
   }
 
   const handleClick = async () => {
-    const getReqLink = `http://10.40.11.12:3000/startContainer?url=${link}`
+    const getReqLink = `${process.env.HOSTADRR}/startContainer?url=${link}`
     console.log(getReqLink);
     const res = await axios.get(getReqLink)
     const tempUrl = res.data.url;

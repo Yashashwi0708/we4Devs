@@ -6,7 +6,7 @@ from telegram.ext import ApplicationBuilder, MessageHandler, filters, ContextTyp
 # Constants
 TOKEN: Final = '6343701605:AAHB38P9f2AqD-RMxKxP5XUGVWVcHcleook'
 BOT_USERNAME: Final = '@SafeGuradBot'
-WEBSITE_URL: Final = 'https://SafeGuard.wce.wlug.org'  
+WEBSITE_URL: Final = 'https://SafeGuard.wcewlug.org'  
 
 # Responses
 async def handle_response(text: str, update: Update, context: ContextTypes.DEFAULT_TYPE) -> str:

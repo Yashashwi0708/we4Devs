@@ -9,7 +9,7 @@ const SpamNumCheck = () => {
     console.log(info);
     const handleSubmit = async () => {
         console.log('here');
-        axios(`http://10.40.11.12:3000/getInfo/${number}`, {
+        axios(`${process.env.HOSTADRR}/getInfo/${number}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'

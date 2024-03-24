@@ -5,6 +5,8 @@ const cors = require('cors');
 const { findAvailablePort, startContainer } = require('./container.js');
 const { processMessage, sendResponse, replyHandler } = require('./../Bots/Whatsapp/index.js');
 const crypto = require('crypto');
+const dotenv = require('dotenv');
+dotenv.config();
 
 const app = express();
 const port = 3000;
