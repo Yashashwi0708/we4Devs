@@ -77,9 +77,14 @@ const Spam = (props) => {
                 <>
                   <p>Link Detected {text.match(urlRegex)[0]} <br/></p>
                   <button onClick={handleClick} >Open Virtual Browser</button>
+
+                  <button className='button' onClick={() => props.setResult('')}>Go Back</button>
                 </>
               ) : (
+                <>
                 <p>No Link Detected</p>
+                <button className='button' onClick={() => props.setResult('')}>Go Back</button>
+                </>
               )
             }
           </div>

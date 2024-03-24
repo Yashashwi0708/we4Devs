@@ -14,7 +14,7 @@ const IsSpam = (props) => {
     <>
       {
         isSpam ? (
-          <Spam str={str} score={score} />
+          <Spam str={str} score={score} setResult={props.setResult}/>
         ) : (
           <NotSpam score={score} setResult={props.setResult}/>
         )
