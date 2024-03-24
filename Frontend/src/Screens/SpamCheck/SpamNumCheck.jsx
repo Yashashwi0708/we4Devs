@@ -1,17 +1,20 @@
 import React, { useState } from 'react'
 import spamCheck from '../../../Assets/spamCheck.png';
-
+import { Portal } from 'react-portal';
+import { PortalWithState } from 'react-portal';
+import axios from 'axios';
 const SpamNumCheck = () => {
     const [number, setNumber] = useState('');
+    const [info,settInfo] = useState({})
 
     const handleSubmit = async () => {
-        await fetch(`http://10.40.11.12:3000/getInfo/${number}`, {
+        axios(`http://10.40.11.12:3000/getInfo/${number}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
             },
         }).then(res => {
-            console.log(res.json())
+            settInfo(res.data.body);
         })
     }
 
