@@ -4,29 +4,35 @@ import './vbrowser.css';
 import React, { useState, useEffect } from 'react'
 import spamCheck from '../../../Assets/spamCheck.png';
 
-
 const VBrowser = (props) => {
   const [url, setURL] = useState('');
   const [resp, setResp] = useState('');
   const [timeRemaining, setTimeRemaining] = useState(600); // 10 minutes in seconds
   const [timerActive, setTimerActive] = useState(false);
 
-
   const handleSubmit = async () => {
-    await fetch(`http://10.40.11.12:3000/startContainer?url=${url}`, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-    }).then(res => {
-      console.log(res.json())
-      return res.json();
-    }).then(data => {
-      console.log(data);
+    try {
+      const response = await fetch(`http://10.40.11.12:3000/startContainer?url=${url}`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+
+      const data = await response.json();
+      console.log(data); // Make sure the data received is what you expect
       setResp(data.url);
       setTimerActive(true);
-    });
+    } catch (error) {
+      console.error('Error:', error);
+      // Handle error appropriately, e.g., show an error message to the user
+    }
   }
+
 
   const handleChange = (e) => {
     setURL(e.target.value);
@@ -48,26 +54,30 @@ const VBrowser = (props) => {
   };
   return (
     <div>
-      <div className="gpt3__header section__padding" id="home">
+      <div className="gpt3__header section__padding" id="home" >
 
         <div className="gpt3__header-content">
           <h1 className="gradient__text">Start Disposable Browser</h1>
-          <p className='text2'>Start a 10 minute disposable browser session. <br/>Keep your online activities private and your devices safe from malware.</p>
-          <div className="num">
-            <input type="text" placeholder="Enter URL (optional) " onChange={handleChange} />
-            <button type="button" onClick={handleSubmit}>Start</button>
-          </div>
+          <p className='text2'>Start a 10 minute disposable browser session. <br />Keep your online activities private and your devices safe from malware.</p>
+          {
+            !resp && <div className="num">
+              <input type="text" placeholder="Enter URL (optional) " onChange={handleChange} />
+              <button type="button" onClick={handleSubmit}>Start</button>
+            </div>
+          }
         </div>
 
         {
-          resp===''? <div className="gpt3__header-image vert-move">
+          !resp ? <div className="gpt3__header-image vert-move">
             <img style={{ scale: "1.25" }} src={spamCheck} />
-          
-          </div>:
-          <div>
-          <p className='text2'>Your disposable browser session is active for {formatTime(timeRemaining)}.</p>
-          <p>URL: {resp}</p>
-        </div>
+          </div>
+            :
+            <div style={{display:'flex', justifyContent:'center',alignItems:'center' , width:'50%', height:'100%'}}>
+              <div className="gpt3__header-content glass" style={{ height: '60%', padding:'5% 2%', margin:'18% 0'}}>
+                <p className='gradient__text' style={{ fontWeight: '500' ,fontSize:'1.4rem' }}>Session started at URL: <a href={resp} target="_blank">{resp}</a></p>
+                <p className='text2'>Your disposable browser session is active for {formatTime(timeRemaining)}.<br /> Do not refresh this page, else you will lose the session.</p>
+              </div>
+            </div>
         }
 
       </div>

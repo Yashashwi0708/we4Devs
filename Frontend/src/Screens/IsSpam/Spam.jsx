@@ -69,8 +69,7 @@ const Spam = (props) => {
             <div className='score red'>{(100 - (props.score.toFixed(3)))}%</div>
 
             <p >This Message is Spam</p>
-
-
+            
             {
               urlRegex.test(text) ? (
                 <>
