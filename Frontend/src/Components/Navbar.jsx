@@ -27,7 +27,7 @@ const Navbar = () => {
             <p>Virtual Browser</p>
           </Link>
           <Link to={'/spamnumber'} className='hover'>
-            <p>Spammer Detection</p>
+            <p>Phone Info</p>
           </Link>
           <Link to={'/bots'} className='hover'>
             <p>Bots</p>
