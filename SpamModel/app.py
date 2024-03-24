@@ -16,9 +16,10 @@ def check_spam():
     result = res[0]
     print(res)
     if result["label"] == "LABEL_0":
-        return jsonify({'is_Spam': False, 'probability': 1-result['score']-random.randint(1,5)*0.01})
+        # return jsonify({'is_Spam': False, 'probability': 1-result['score']-random.randint(1,4)*0.01})
+        return jsonify({'is_Spam': False, 'probability': 1-result['score']})
     else:
-        return jsonify({'is_Spam': True, 'probability': result['score']-random.randint(1,5)*0.01})
+        return jsonify({'is_Spam': True, 'probability': result['score']})
 
 
 @app.route('/startContainer', methods=['GET'])

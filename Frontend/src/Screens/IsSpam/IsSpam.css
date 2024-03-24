@@ -10,8 +10,10 @@
 .right{
     display: flex;
     width: 48%;
-    justify-content: center;    
+    justify-content: center; 
+    align-items: center;   
     flex-direction: column;
+    gap: 2rem
 }
 .glass{
     /* flex space around */
@@ -56,4 +58,19 @@
     cursor: pointer;
     outline: none;
     border-radius: 20px;
+}
+
+
+.score {
+    width: 12rem; /* Adjust the width and height as needed */
+    height: 12rem;
+    border-radius: 50%; /* Ensures the container is a circle */
+    background-color: #34db6c2a; 
+    color: white; /* Text color */
+    border: 5px solid #34db6c; /* Border color */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2.5rem; /* Adjust font size as needed */
+    font-family: Arial, sans-serif; /* Adjust font family as needed */
 }

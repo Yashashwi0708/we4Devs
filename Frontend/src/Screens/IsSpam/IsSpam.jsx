@@ -8,13 +8,15 @@ const IsSpam = (props) => {
   console.log(props.result);
   const str = props.result.text
   const isSpam = props.result.body.is_Spam
+  const score = props.result.body.probability
+  console.log(props)
   return (
     <>
       {
         isSpam ? (
-          <Spam str={str} />
+          <Spam str={str} score={score} />
         ) : (
-          <NotSpam />
+          <NotSpam score={score} setResult={props.setResult}/>
         )
       }
     </>

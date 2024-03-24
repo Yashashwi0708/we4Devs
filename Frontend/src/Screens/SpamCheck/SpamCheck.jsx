@@ -14,6 +14,14 @@ const SpamCheck = () => {
         console.log(text);
     }
     const handleClick = (e) => {
+        if (text === '') {
+            alert('Input field is empty!');
+            return;
+        }
+        if (text.length < 10) {
+            alert('Input text is too short!');
+            return;
+        }
         axios('http://10.40.11.12:3000/checkSpam', {
             method: 'POST',
             headers: {
@@ -50,8 +58,8 @@ const SpamCheck = () => {
                     </div> 
                 ):(
                     <div>
-                        <IsSpam result={result} />
-                        <button className='' onClick={() => setResult('')}>Go Back</button>
+                        <IsSpam result={result} setResult={setResult} />
+                        {/* <button className='' onClick={() => setResult('')}>Go Back</button> */}
                     </div>
                 )
         }

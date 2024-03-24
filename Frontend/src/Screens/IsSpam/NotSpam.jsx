@@ -2,7 +2,7 @@ import React from 'react'
 import notSpam from '../../../Assets/notSpam.png'
 import './IsSpam.css'
 
-const NotSpam = () => {
+const NotSpam = (props) => {
     return (
         <div className='outer'>
             <div className='glass'>
@@ -10,11 +10,10 @@ const NotSpam = () => {
                     <img src={notSpam} alt='spam' />
                 </div>
                 <div className='right'>
-                    <p style={{ color: 'green' }}>This Message is Not Spam</p>
+                    <div className='score'>{(100 - (props.score.toFixed(3)))}%</div>
                     
-                    <p>Link Detected</p>
-                    <p>Open In Virtual Browser</p>
-                    <button>Virtual Browser</button>
+                    <p>Good to go! <br/> This message is not spam.</p>
+                    <button className='button' onClick={() => props.setResult('')}>Go Back</button>
                 </div>
             </div>
         </div>
