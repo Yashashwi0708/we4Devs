@@ -10,6 +10,7 @@ import VBrowser from './Screens/VirtualBrowser/VBrowser';
 import Bots from './Screens/Bots/Bots';
 import AboutUs from './Screens/AboutUs/AboutUs';
 import WhatIsSpam from './Screens/WhatIsSpam/WhatIsSpam';
+import Footer from './Components/Footer';
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
           <Route path='/aboutus' element={<AboutUs />} />
           <Route path='/whatisspam' element={<WhatIsSpam />} />
         </Routes>
+        <Footer />
       </Router>
     </>
   );
