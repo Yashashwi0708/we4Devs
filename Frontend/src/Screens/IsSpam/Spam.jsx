@@ -46,7 +46,7 @@ const Spam = (props) => {
     let highlightedText = para.replace(/\b\w+\b/g, function (word) {
       const lowerWord = word.toLowerCase();
       if (mp.has(lowerWord)) {
-        return `<span style="color:white; background-color: #ff0000; border-radius:2px">${word}</span>`;
+        return `<span style="color:white; background-color: #ee4e4e; border-radius:2px">${word}</span>`;
       } else {
         return word;
       }
@@ -59,20 +59,24 @@ const Spam = (props) => {
     <div>
 
       <div className='outer'>
+
         <div className='glass'>
+
           <div className='left'>
-            <img src={itisSpam} alt='spam' />
+            <img src={itisSpam} alt='spam' style={{position:'relative', zIndex:-1}}/>
+            <p className='text3'>{highlight(props.str, mp)}</p>
           </div>
-          <div className='right'>
-            <p style={{ color: '#FF203F' }}>This Message is Spam</p>
-            {highlight(props.str, mp)}
+          <div className='right '>
+            <div className='score red'>{(100 - (props.score.toFixed(3)))}%</div>
+
+            <p >This Message is Spam</p>
+
 
             {
               urlRegex.test(text) ? (
                 <>
-                  <p>Link Detected {text.match(urlRegex)[0]} </p>
-                  <p>Open In Virtual Browser</p>
-                  <button onClick={handleClick} >Virtual Browser</button>
+                  <p>Link Detected {text.match(urlRegex)[0]} <br/></p>
+                  <button onClick={handleClick} >Open Virtual Browser</button>
                 </>
               ) : (
                 <p>No Link Detected</p>

@@ -4,7 +4,7 @@
     align-items: center;
 }
 .left{
-    padding: 90px;
+    padding: 5%;
     width: 40%;
 }
 .right{
@@ -40,7 +40,7 @@
     height: 100%;
     /* max-height: 100%; */
     border-radius: 10px;
-    scale: 1.5
+    scale: 1.5,    
 }
 .right button{
     margin: auto;
@@ -73,4 +73,23 @@
     align-items: center;
     font-size: 2.5rem; /* Adjust font size as needed */
     font-family: Arial, sans-serif; /* Adjust font family as needed */
+}.red{
+    background-color: #db34342a; 
+    color: white; /* Text color */
+    border: 5px solid #ee4e4e; 
+}
+
+.text3{
+    font-size: 1rem;
+    font-weight: bold;
+    font-family: 'Roboto', sans-serif;
+    color: white;
+    text-align: center;
+    margin: 10px;
+    font-weight: 400;
+    background-color: #3a557c82;
+    padding: 1rem 1.5rem;
+    margin-top: 2rem;
+    border-radius: 10px;
+    text-align: justify;
 }
