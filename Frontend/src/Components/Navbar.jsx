@@ -29,6 +29,9 @@ const Navbar = () => {
           <Link to={'/spamnumber'} className='hover'>
             <p>Spammer Detection</p>
           </Link>
+          <Link to={'/bots'} className='hover'>
+            <p>Bots</p>
+          </Link>
           <p style={{ color: "red" }}>What is Spam?</p>
           <a href="https://github.com/Yashashwi0708/we4Devs" className='hover'><p>Github</p></a>
           <p>About Us</p>

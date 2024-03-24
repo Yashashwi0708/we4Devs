@@ -7,6 +7,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import SpamCheck from './Screens/SpamCheck/SpamCheck';
 import SpamNumCheck from './Screens/SpamCheck/SpamNumCheck';
 import VBrowser from './Screens/VirtualBrowser/VBrowser';
+import Bots from './Screens/Bots/Bots';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           <Route path='/checkspam' element={<SpamCheck />} />
           <Route path='/spamnumber' element={<SpamNumCheck />} />
           <Route path='/vbrowser' element={<VBrowser />} />
+          <Route path='/bots' element={<Bots />} />
         </Routes>
       </Router>
     </>
