@@ -7,6 +7,8 @@ import os
 from transformers import pipeline
 import subprocess
 import random
+import requests
+import json
 
 load_dotenv()
 start_port = int(os.getenv("START_PORT"))
@@ -16,23 +18,43 @@ default_password = os.getenv("DEFAULT_PASSWORD")
 docker_url = os.getenv("DOCKER_URL")
 docker_version = os.getenv("DOCKER_VERSION")
 
+API_URL = "https://api-inference.huggingface.co/models/Titeiiko/OTIS-Official-Spam-Model"
+HEADERS = {"Authorization": "Bearer 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"}
+
 app = Flask(__name__)
+
+def query(payload):
+    response = requests.post(API_URL, headers=HEADERS, json=payload)
+    return response.json()
 
 @app.route('/checkSpam', methods=['POST'])
 def check_spam():
-    data = request.get_json()
-    if 'input_text' not in data:
-        return jsonify({'error': 'Input text not provided'}), 400
+    data = request.json
+    inputs = data.get('inputs')
+    if inputs is None:
+        return jsonify({'error': 'Missing input text'}), 400
+
+    res = query({"inputs": inputs})
+    # data = request.get_json()
+    # if 'input_text' not in data:
+    #     return jsonify({'error': 'Input text not provided'}), 400
     
-    input_text = data['input_text']
-    pipe = pipeline("text-classification", model="Titeiiko/OTIS-Official-Spam-Model")
-    res = pipe(input_text)
-    result = res[0]
-    print(res)
-    if result["label"] == "LABEL_0":
-        return jsonify({'is_Spam': False, 'probability': 1-result['score']})
+    # input_text = data['input_text']
+    # pipe = pipeline("text-classification", model="Titeiiko/OTIS-Official-Spam-Model")
+    # res = pipe(input_text)
+    
+    if res and len(res) >= 1:
+        result = res[0] 
+        print(type(result[0]))
+        print(result[0])
+
+
+        if result[0]['label'] == "LABEL_0":
+            return jsonify({'is_Spam': False, 'probability': result[0]['score'], 'res': result})
+        else:
+            return jsonify({'is_Spam': True, 'probability': result[0]['score'], 'res': result})
     else:
-        return jsonify({'is_Spam': True, 'probability': result['score']})
+        return jsonify({'error': 'Unable to determine spam or not'}), 500
 
 
 def find_available_port(start_port, end_port):
