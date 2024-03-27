@@ -4,11 +4,7 @@ from dotenv import load_dotenv
 
 import socket
 import os
-from transformers import pipeline
-import subprocess
-import random
 import requests
-import json
 
 load_dotenv()
 start_port = int(os.getenv("START_PORT"))
