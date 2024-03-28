@@ -14,7 +14,7 @@ const client = new Client({
 async function checkSpam(message, interaction) {
   console.log('Hello');
   try {
-    const res = await axios.post(`http://10.40.11.12:3000/checkSpam`, {
+    const res = await axios.post(`http://localhost:3000/checkSpam`, {
       input_text: message
     });3000
 

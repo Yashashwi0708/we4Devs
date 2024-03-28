@@ -2,38 +2,59 @@ const express = require('express');
 import('node-fetch');
 const bodyParser = require('body-parser');
 const cors = require('cors');
-const { findAvailablePort, startContainer } = require('./container.js');
-const { processMessage, sendResponse, replyHandler } = require('./../Bots/Whatsapp/index.js');
+const { replyHandler } = require('./../Bots/Whatsapp/index.js');
 const crypto = require('crypto');
-const dotenv = require('dotenv');
-dotenv.config();
+const axios = require('axios');
+require('dotenv').config();
 
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000
 
-// Middleware to parse JSON bodies
 app.use(cors());
 app.use(bodyParser.json());
 
-async function query(data) {
-    try {
-        const response = await fetch(
-            "http://127.0.0.1:5000/checkSpam",
-            {
-                method: "POST",
-                body: JSON.stringify(data), // Ensure data is stringified
-                headers: {
-                    'Content-Type': 'application/json' // Specify content type
-                }
-            }
-        );
-        const result = await response.json();
-        return result;
-    } catch (error) {
-        console.error("Error querying model:", error);
-        throw error;
-    }
+const API_URL = process.env.API_URL;
+const HEADERS = {
+    'Authorization': `Bearer ${process.env.API_KEY}`, 
+    'Content-Type': 'application/json'
+};
+const VERIFY_TOKEN = process.env.VERIFY_TOKEN;
+
+function query(payload) {
+    return axios.post(API_URL, payload, { headers: HEADERS })
+        .then(response => response.data)
+        .catch(error => {
+            console.error('Error querying API:', error);
+            throw error; 
+        });
 }
+
+app.post('/checkSpam', async (req, res) => {
+    try {
+        const data = req.body;
+        const inputs = data.inputs;
+        if (!inputs) {
+            return res.status(400).json({ error: 'Missing input text' });
+        }
+
+        const result = await query({ inputs });
+
+        if (result && result.length >= 1) {
+            const firstResult = result[0][0];
+            if (firstResult.label === "LABEL_0") {
+                return res.json({ is_Spam: false, probability: firstResult.score, res: result });
+            } else {
+                return res.json({ is_Spam: true, probability: firstResult.score, res: result });
+            }
+        } else {
+            return res.status(500).json({ error: 'Unable to determine spam or not' });
+        }
+    } catch (error) {
+        console.error('Error processing request:', error);
+        return res.status(500).json({ error: 'Internal server error' });
+    }
+});
+
 
 app.post('/webhooks', (req, res) => {
     const payload = req.body;
@@ -46,41 +67,17 @@ app.get('/webhooks', (req, res) => {
     const challenge = req.query['hub.challenge'];
     const verifyToken = req.query['hub.verify_token'];
 
-    if (mode === 'subscribe' && verifyToken === 'test') {
-
+    if (mode === 'subscribe' && verifyToken === VERIFY_TOKEN) {
         console.log('[LOG] Verification successful');
         res.status(200).send(challenge);
     } else {
-
         console.log('[LOG] Verification failed');
         res.sendStatus(403);
     }
 });
 
-// Route handler for /checkSpam endpoint
-app.post('/checkSpam', async (req, res) => {
-    try {
-        const response = await query({ input_text: req.body.input_text });
-        res.send(response);
-    } catch (error) {
-        res.status(500).send({ error: `Internal Server Error, ${error}` });
-    }
-});
-
-app.get('/startContainer', async (req, res) => {
-    const port = await findAvailablePort(6800, 6900);
-    const url = req.query.url || 'https://www.google.co.in';
-    const pass = 'password'
-
-    try {
-        const containerId = await startContainer(port, url, pass);
-        res.send({ url: `https://localhost:${port}`, success: true });
-    } catch (error) {
-        res.status(500).send('Error starting container: ' + error.message);
-    }
-
-});
 const { getInfoObj } = require('./truecaller_service/index.js');
+
 app.get('/getInfo/:phoneNumber', async (req, res) => {
     return res.send(await getInfoObj(req.params.phoneNumber));
 });

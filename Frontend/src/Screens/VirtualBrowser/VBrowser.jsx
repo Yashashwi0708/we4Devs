@@ -12,7 +12,7 @@ const VBrowser = (props) => {
 
   const handleSubmit = async () => {
     try {
-      const response = await fetch(`http://10.40.11.12:3000/startContainer?url=${url}`, {
+      const response = await fetch(`http://localhost:3000/startContainer?url=${url}`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json'
@@ -27,7 +27,7 @@ const VBrowser = (props) => {
       lolcahost:3000
       console.log(data); // Make sure the data received is what you expect
       const port = data.url[18]+data.url[19]+data.url[20]+data.url[21];
-      const new_url = `https://10.40.11.12:${port}`;
+      const new_url = `https://localhost:${port}`;
       setResp(new_url);
       setTimerActive(true);
     } catch (error) {

@@ -32,9 +32,10 @@ const sendSpamTemplate = (phoneNumber, spamScore, detected = "Spam Content") => 
 // Function to send messages via WhatsApp API
 function sendSpamResponse(phoneNumber, spamScore) {
     // Replace these with your actual API credentials
-    const API_KEY = "EAAMZAwASS9x4BO5OnNYtCHpK5MxDdEnnFZCpuZCHC0tuZCyvpSh7n0YakMuP2UA9ISltF46BrpOaiQd01SlmLNZCKZCNaIX2K8Nvj6zZA68lZBmn0mXLQNNemvki2NrIYiWoF3G07V4cbogiJIeEOs8j3jrnUwZCmN6uuDgPsZAdAaTyDvq3nokdIy2TR9OvW2v9RunRw6cTTSIuWaZA9Bd580m41VgjKYZD";
+    const API_KEY = "EAAGAiJBrWXABO4lhIZAFqnOk1ATWZBHpZCoBJofB79J2Fabe8Q4eG4xBVL3Gd1XcbamDxrWZB32nZADJodLhgDFxSd22UX302VwZBCcgBTwc3ZBfng5SLikmuvaunMaUzSYTsv2iBQctg7UE1JjxvSJKlX8a4XFcZAnD5Fm7C0DtqMXciddZA0zEMOeeKDboF8RpRBKYIq4cHjg6JcsLYo7mdD9q403kZD";
     const BASE_URL = "https://graph.facebook.com/v18.0/252567547942507/messages";
 
+// 1505f40aa3103beb3cc68eaaecd26055
     axios.post(BASE_URL, sendSpamTemplate(
         phoneNumber,
         spamScore,
