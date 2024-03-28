@@ -2,9 +2,11 @@ const express = require('express');
 import('node-fetch');
 const bodyParser = require('body-parser');
 const cors = require('cors');
-const { replyHandler } = require('./../Bots/Whatsapp/index.js');
+const { replyHandler } = require('./Whatsapp/index.js');
 const crypto = require('crypto');
+
 const axios = require('axios');
+
 require('dotenv').config();
 
 const app = express();
@@ -13,21 +15,20 @@ const port = process.env.PORT || 3000
 app.use(cors());
 app.use(bodyParser.json());
 
-const API_URL = process.env.API_URL;
-const HEADERS = {
-    'Authorization': `Bearer ${process.env.API_KEY}`, 
-    'Content-Type': 'application/json'
-};
+
 const VERIFY_TOKEN = process.env.VERIFY_TOKEN;
 
 function query(payload) {
-    return axios.post(API_URL, payload, { headers: HEADERS })
+    return axios.post(process.env.API_URL, payload, { headers: {
+        'Authorization': `Bearer ${process.env.API_KEY}`, 
+        'Content-Type': 'application/json'
+    }})
         .then(response => response.data)
         .catch(error => {
-            console.error('Error querying API:', error);
-            throw error; 
+            console.error('Error querying API:', error.message);
         });
 }
+
 
 app.post('/checkSpam', async (req, res) => {
     try {
@@ -77,6 +78,8 @@ app.get('/webhooks', (req, res) => {
 });
 
 const { getInfoObj } = require('./truecaller_service/index.js');
+const { patch } = require('request');
+const path = require('path');
 
 app.get('/getInfo/:phoneNumber', async (req, res) => {
     return res.send(await getInfoObj(req.params.phoneNumber));
