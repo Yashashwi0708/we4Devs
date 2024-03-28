@@ -28,7 +28,7 @@ const SpamCheck = () => {
                 'Content-Type': 'application/json'
             },
             data: JSON.stringify({
-                "input_text": text
+                "inputs": text
             }),
         }).then((res) => {
             setResult({"body":res.data,"text":text});
