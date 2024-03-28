@@ -22,7 +22,7 @@ const SpamCheck = () => {
             alert('Input text is too short!');
             return;
         }
-        axios(`http://10.40.11.12:3000/checkSpam`, {
+        axios(`http://localhost:3000/checkSpam`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

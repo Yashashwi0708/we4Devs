@@ -14,10 +14,10 @@ async def handle_response(text: str, update: Update, context: ContextTypes.DEFAU
 
     if len(processed) == 10 and processed.isdigit():
         await handle_number_message(update, context, processed)
-        return ""  # Return an empty string to avoid printing the coroutine object
+        return "" 
     elif len(text) > 10:
         await handle_text_message(update, context)
-        return ""  # Return an empty string to avoid printing the coroutine object
+        return "" 
     else:
         await update.message.reply_text("I do not understand you.")
         await help_command(update, context)
@@ -94,7 +94,7 @@ async def handle_text_message(update: Update, context: ContextTypes.DEFAULT_TYPE
         payload = {
             "input_text": text
         }
-        url = "http://10.40.11.12:3000/checkSpam"
+        url = "http://localhost:3000/checkSpam"
         response = requests.post(url, json=payload).json()
         is_spam = response.get("is_Spam", False)
         probability = response.get("probability", 0.0) * 100
