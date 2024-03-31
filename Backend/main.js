@@ -76,6 +76,9 @@ app.get('/webhooks', (req, res) => {
         res.sendStatus(403);
     }
 });
+app.get('/', (req, res) => {
+    res.json({ message: 'Hello World' });
+});
 
 const { getInfoObj } = require('./truecaller_service/index.js');
 const { patch } = require('request');
