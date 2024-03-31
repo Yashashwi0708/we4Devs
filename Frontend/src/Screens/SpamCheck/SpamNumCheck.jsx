@@ -5,42 +5,54 @@ const SpamNumCheck = () => {
     const [number, setNumber] = useState('');
     const [info, settInfo] = useState('')
     const [fnum, setFnum] = useState('')
+    const [loading, setLoading] = useState(false);
     let num = null;
     console.log(info);
     const handleSubmit = async () => {
         console.log('here');
+        setLoading(true);
         axios(`https://we4devs.onrender.com/getInfo/${number}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
             },
         }).then(res => {
-            console.log(res.data.body);
-            settInfo(res.data.body);
-            setFnum(number);
+            setLoading(false);
+            if (res.data.body === false) {
+                alert('No data found');
+                return;
+            } else {
+                console.log(res.data.body);
+                settInfo(res.data.body);
+                setFnum(number);
+            }
+        }).catch(err => {
+            alert('Error fetching data');
+            setLoading(false);
+            console.log(err);
         })
     }
 
     const handleChange = (e) => {
         setNumber(e.target.value);
     }
-    let regionNames = new Intl.DisplayNames(['en'], {type: 'region'});
+    let regionNames = new Intl.DisplayNames(['en'], { type: 'region' });
     function blurEmail(email) {
         var parts = email.split('@');
         if (parts.length !== 2) {
-          return email;
+            return email;
         }
-      
+
         var username = parts[0];
         var domain = parts[1];
-      
+
         if (username.length < 4) {
-          return email;
+            return email;
         }
         var blurredUsername = username.substring(0, username.length - 3) + '***';
-      
+
         return blurredUsername + '@' + domain;
-      }
+    }
     return (
         <div>
             <div className="gpt3__header section__padding" id="home">
@@ -49,7 +61,8 @@ const SpamNumCheck = () => {
                     <p className='text2'>Easily retrieve user details using their phone number <br /> Powered by <span style={{ color: '#2589ff', backgroundColor: 'aliceblue', padding: '0 0.35rem 0 0.25rem', borderRadius: '5px', fontWeight: '600' }}>Truecaller</span></p>
                     <div className="num">
                         <input type="text" placeholder="Enter Phone Number " onChange={handleChange} />
-                        <button type="button" onClick={handleSubmit}>Submit</button>
+                        {loading ? <p>Loading...</p> :
+                            <button type="button" onClick={handleSubmit}>Submit</button>}
                     </div>
                 </div>
                 {!info && (
@@ -58,9 +71,9 @@ const SpamNumCheck = () => {
                     </div>)
                 }
                 {info && (
-                    <div className="gpt3__header-image glass" style={{display:'flex', flexDirection:'column'}}>
-                   
-                        
+                    <div className="gpt3__header-image glass" style={{ display: 'flex', flexDirection: 'column' }}>
+
+
                         <table className="info">
                             <tbody>
                                 <tr>
@@ -81,7 +94,7 @@ const SpamNumCheck = () => {
                                 </tr>
                                 <tr>
                                     <th>RuleName:</th>
-                                    <td>{info.ruleName? info.ruleName: "-"}</td>
+                                    <td>{info.ruleName ? info.ruleName : "-"}</td>
                                 </tr>
                                 <tr>
                                     <th>Carrier</th>

@@ -7,6 +7,7 @@ import spamCheck from '../../../Assets/disposableBrowsers.png';
 const VBrowser = (props) => {
   const [url, setURL] = useState('');
   const [resp, setResp] = useState('');
+  const [isErr, setIsErr] = useState(false);
   const [timeRemaining, setTimeRemaining] = useState(600); // 10 minutes in seconds
   const [timerActive, setTimerActive] = useState(false);
 
@@ -24,7 +25,7 @@ const VBrowser = (props) => {
       }
 
       const data = await response.json();
-      lolcahost:3000
+      setIsErr(false);
       console.log(data); // Make sure the data received is what you expect
       const port = data.url[18]+data.url[19]+data.url[20]+data.url[21];
       const new_url = `https://localhost:${port}`;
@@ -32,7 +33,10 @@ const VBrowser = (props) => {
       setTimerActive(true);
     } catch (error) {
       console.error('Error:', error);
-      // Handle error appropriately, e.g., show an error message to the user
+      setIsErr(true);
+      setResp(' ');
+      // alert('This can only be accessed from Walchand Campus Network (WIFI6) for now.');
+
     }
   }
 
@@ -77,8 +81,13 @@ const VBrowser = (props) => {
             :
             <div style={{display:'flex', justifyContent:'center',alignItems:'center' , width:'50%', height:'100%'}}>
               <div className="gpt3__header-content glass" style={{ height: '60%', padding:'5% 2%', margin:'18% 0'}}>
-                <p className='gradient__text' style={{ fontWeight: '500' ,fontSize:'1.4rem' }}>Session started at URL: <a href={resp} target="_blank">{resp}</a></p>
-                <p className='text2'>Your disposable browser session is active for {formatTime(timeRemaining)}.<br /> Do not refresh this page, else you will lose the session.</p>
+                {
+                  isErr ? <p className='gradient__text' style={{ fontWeight: '500' }}>At the moment, this service can only be accessed from Walchand Campus Network (WIFI6).</p> :
+                  <>
+                  <p className='gradient__text' style={{ fontWeight: '500' ,fontSize:'1.4rem' }}>Session started at URL: <a href={resp} target="_blank">{resp}</a></p>
+                  <p className='text2'>Your disposable browser session is active for {formatTime(timeRemaining)}.<br /> Do not refresh this page, else you will lose the session.</p>
+                  </>
+                }
               </div>
             </div>
         }
@@ -87,15 +96,6 @@ const VBrowser = (props) => {
     </div>
   )
 
-  // const url = props.url || 'https://leetcode.com/jyot_150/';
-  // console.log(url);
-  // return (
-  //   <>
-  //     <div className='outer'>
-  //       <iframe className='iframe' src={url} title="Virtual Browser" />
-  //     </div>
-  //   </>
-  // );
 };
 
 export default VBrowser;
