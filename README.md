@@ -1,6 +1,7 @@
-# we4Devs 👨‍💻👩‍💻
-
+<h1 align="center">we4Devs 👨‍💻👩‍💻 </h1>
+<h1 align="center"> 
 <img align="center" src="https://raw.githubusercontent.com//Yashashwi0708/we4Devs/main/Frontend/Assets/we4Devs.png" alt="jyotiraditya-patil-996933230" height="400" width="400" />
+</h1>
 
 
 ##### WCE ACM Hackathon Project 🚀
