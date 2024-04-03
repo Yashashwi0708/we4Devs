@@ -10,7 +10,16 @@
 
 - **Team Name**: we4Devs 💻
   
-- **Team Leader:** <a href="https://github.com/Yashashwi0708">Yashashwi Kailas Patil	</a> 🎯
+- **Team Leader:** <a href="https://github.com/Yashashwi0708">Yashashwi Kailas Patil	</a> 
+ 
+**Team Members:**
+  
+1. <a href="https://github.com/Yashashwi0708">Siddhesh Kitkaru</a>
+ 
+1. <a href="https://github.com/Yashashwi0708">Smit Butle</a>
+
+1. <a href="https://github.com/Yashashwi0708">Jyotiraditya Patil</a>
+
 
 - **Domain/Theme:** Cyber Security 🔒
 
@@ -19,6 +28,8 @@
 - **Whole Documentation:** <a href="https://docs.google.com/document/d/1pcAZzuoEXgjS8k2VcAFIBRm0pIsiB-0j/edit">Idea Submission	</a> 📝
   
 - **UI:** <a href="https://www.figma.com/file/FQkREiISbToyNUTYKyh8WJ/Fraud-Detection?type=design&node-id=0%3A1&mode=design&t=upqrdJmELEcgcdtl-1">Figma File</a> 🎨
+  
+- **FlowChart:** <a href="https://www.figma.com/file/hGTWKz3lEzKd1fVeFf7rLq/Use-Case-Diagram%2FFlow-Diagram?type=whiteboard&node-id=0%3A1&t=IkrpkrCPhWvtkPgO-1">Figma File</a> 🎨
 
 # Setup on your PC 🖥️
 ```sh
