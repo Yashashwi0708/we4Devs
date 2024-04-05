@@ -14,8 +14,8 @@ const client = new Client({
 async function checkSpam(message, interaction) {
   console.log('Hello');
   try {
-    const res = await axios.post(`http://localhost:3000/checkSpam`, {
-      input_text: message
+    const res = await axios.post(`https://we4devs.onrender.com/checkSpam`, {
+      inputs: message
     });3000
 
     console.log(res.data); 
