@@ -22,7 +22,7 @@ const SpamCheck = () => {
             alert('Input text is too short!');
             return;
         }
-        axios(`http://localhost:3000/checkSpam`, {
+        axios(`https://we4devs.onrender.com/checkSpam`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
