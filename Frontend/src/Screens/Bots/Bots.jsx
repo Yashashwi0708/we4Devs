@@ -12,7 +12,7 @@ function Bots() {
           <img src={whastapp} alt='WhatsApp' />
           <h1 className='gradient__text' style={{fontSize:'1.6rem'}}>WhatsApp Bot</h1>
           <p>Powered by SafeGuard</p>
-          <a href='https://wa.me/+15550389815' target='_blank' rel='noreferrer' style={{color:"white"}}>Add to WhatsApp</a>
+          <a href='https://wa.me/+15550684919' target='_blank' rel='noreferrer' style={{color:"white"}}>Add to WhatsApp</a>
         </div>
         <div className='chi glass2'>
           <img src={telegram} alt='Telegram' />
