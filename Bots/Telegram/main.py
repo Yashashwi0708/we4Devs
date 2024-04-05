@@ -94,7 +94,7 @@ async def handle_text_message(update: Update, context: ContextTypes.DEFAULT_TYPE
         payload = {
             "input_text": text
         }
-        url = "http://localhost:3000/checkSpam"
+        url = "https://we4devs.onrender.com/checkSpam"
         response = requests.post(url, json=payload).json()
         is_spam = response.get("is_Spam", False)
         probability = response.get("probability", 0.0) * 100

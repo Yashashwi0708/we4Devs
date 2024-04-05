@@ -9,7 +9,7 @@ const SpamNumCheck = () => {
     console.log(info);
     const handleSubmit = async () => {
         console.log('here');
-        axios(`http://localhost:3000/getInfo/${number}`, {
+        axios(`https://we4devs.onrender.com/getInfo/${number}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
