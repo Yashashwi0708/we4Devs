@@ -46,6 +46,8 @@ Change the API's according to your **Backend**
 
 <h1>Backend🌐</h1>
 
+Note: You can run the api, browser service(docker), and bots on different servers, ensuring that proper endpoints are provided and env variables are specified correctly. More changes are coming soon...
+
 To run the spam and browser service
 ```sh
 cd SpamModel
