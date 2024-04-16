@@ -48,21 +48,21 @@ Change the API's according to your **Backend**
 
 Note: You can run the api, browser service(docker), and bots on different servers, ensuring that proper endpoints are provided and env variables are specified correctly. More changes are coming soon...
 
-To run the spam and browser service
+##### To run the spam and browser service
 ```sh
 cd SpamModel
 pip install requirements.txt
 python app.py
 ```
 
-To start the backend API (along with whatsapp bot)
+##### To start the backend API (along with whatsapp bot)
 ```sh
 cd Backend
 npm i
 node main.js
 ```
 
-To start the service for telegram and discord bot
+##### To start the service for telegram and discord bot
 ```sh
 cd Bots
 cd Discord
@@ -73,7 +73,7 @@ cd Telegram
 python main.py
 ```
 
-Define a global .env file 
+##### Define a global .env file 
 ```sh
 
 API_URL= //huggingface hosted model
