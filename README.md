@@ -43,3 +43,53 @@ npm i
 npm run dev
 ```
 Change the API's according to your **Backend** 
+
+<h1>Backend🌐</h1>
+
+To run the spam and browser service
+```sh
+cd SpamModel
+pip install requirements.txt
+python app.py
+```
+
+To start the backend API (along with whatsapp bot)
+```sh
+cd Backend
+npm i
+node main.js
+```
+
+To start the service for telegram and discord bot
+```sh
+cd Bots
+cd Discord
+node index.js
+
+cd Bots
+cd Telegram
+python main.py
+```
+
+Define a global .env file 
+```sh
+
+API_URL= //huggingface hosted model
+API_KEY= //huggingface api key
+VERIFY_TOKEN=test
+DOCKER_URL= //where docker service is running example https://localhost:5000
+TC_KEY= //truecaller api key
+WA_API_KEY= //whatsapp meta api key
+WA_BASE_URL= //whatsapp message url
+
+START_PORT=6800 //start range for browser containers
+END_PORT=6900 //end range for browser containers
+DEFAULT_URL=https://www.google.com
+DEFAULT_PASSWORD=password
+DOCKER_URL=unix://home/smit/.docker/desktop/docker.sock
+DOCKER_VERSION=1.44
+
+```
+
+This is still under development and not intended for production use.
+
