@@ -5,6 +5,8 @@ import axios from 'axios';
 import VBrowser from './../VirtualBrowser/VBrowser';
 import { search } from 'truecallerjs';
 
+const API_URL = import.meta.env.VITE_HOST;
+
 const Spam = (props) => {
   const [url, setUrl] = useState('');
   const text = props.str;
@@ -17,7 +19,7 @@ const Spam = (props) => {
   }
 
   const handleClick = async () => {
-    const getReqLink = `https://we4devs.onrender.com/startContainer?url=${link}`
+    const getReqLink = `${API_URL}/startContainer?url=${link}`
     console.log(getReqLink);
     const res = await axios.get(getReqLink)
     const tempUrl = res.data.url;

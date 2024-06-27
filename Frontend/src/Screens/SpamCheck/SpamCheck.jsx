@@ -5,6 +5,8 @@ import './spamcheck.css';
 import axios from 'axios';
 import IsSpam from './../IsSpam/IsSpam';
 
+const API_URL = import.meta.env.VITE_HOST;
+
 const SpamCheck = () => {
     const [text, setText] = useState('');
     const [result, setResult] = useState('');
@@ -26,7 +28,7 @@ const SpamCheck = () => {
 
         setLoading(true);
 
-        axios(`https://we4devs.onrender.com/checkSpam`, {
+        axios(`${API_URL}/checkSpam`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

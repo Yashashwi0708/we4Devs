@@ -1,5 +1,5 @@
-
 import './vbrowser.css';
+const API_URL = import.meta.env.VITE_HOST;
 
 import React, { useState, useEffect } from 'react'
 import spamCheck from '../../../Assets/disposableBrowsers.png';
@@ -13,7 +13,7 @@ const VBrowser = (props) => {
 
   const handleSubmit = async () => {
     try {
-      const response = await fetch(`https://we4devs.onrender.com/startContainer?url=${url}`, {
+      const response = await fetch(`${API_URL}/startContainer?url=${url}`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json'
@@ -27,8 +27,8 @@ const VBrowser = (props) => {
       const data = await response.json();
       setIsErr(false);
       console.log(data); // Make sure the data received is what you expect
-      const port = data.url[18]+data.url[19]+data.url[20]+data.url[21];
-      const new_url = `https://localhost:${port}`;
+      // const port = data.url[18]+data.url[19]+data.url[20]+data.url[21];
+      const new_url = data.url;
       setResp(new_url);
       setTimerActive(true);
     } catch (error) {
