@@ -1,5 +1,5 @@
-
 import './vbrowser.css';
+const API_URL = import.meta.env.VITE_HOST;
 
 import React, { useState, useEffect } from 'react'
 import spamCheck from '../../../Assets/disposableBrowsers.png';
@@ -13,28 +13,31 @@ const VBrowser = (props) => {
 
   const handleSubmit = async () => {
     try {
-      const response = await fetch(`https://we4devs.onrender.com/startContainer?url=${url}`, {
+      const response = await fetch(`${API_URL}/startContainer?url=${url}`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json'
         },
       });
+      if (response.status === 429) {
 
+        alert('Error: Queue full, please try again later.');
+        throw new Error('Queue full, please try again later.');
+      }
       if (!response.ok) {
         throw new Error('Network response was not ok');
       }
-
+      
       const data = await response.json();
       setIsErr(false);
-      console.log(data); // Make sure the data received is what you expect
-      const port = data.url[18]+data.url[19]+data.url[20]+data.url[21];
-      const new_url = `https://localhost:${port}`;
+      console.log(data);
+      const new_url = data.url;
       setResp(new_url);
       setTimerActive(true);
     } catch (error) {
       console.error('Error:', error);
       setIsErr(true);
-      setResp(' ');
+      setResp('');
       // alert('This can only be accessed from Walchand Campus Network (WIFI6) for now.');
 
     }

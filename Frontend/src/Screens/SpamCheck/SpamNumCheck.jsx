@@ -1,6 +1,9 @@
 import React, { useState } from 'react'
 import spamCheck from '../../../Assets/spamCheck.png';
 import axios from 'axios';
+
+const API_URL = import.meta.env.VITE_HOST;
+
 const SpamNumCheck = () => {
     const [number, setNumber] = useState('');
     const [info, settInfo] = useState('')
@@ -11,7 +14,7 @@ const SpamNumCheck = () => {
     const handleSubmit = async () => {
         console.log('here');
         setLoading(true);
-        axios(`https://we4devs.onrender.com/getInfo/${number}`, {
+        axios(`${API_URL}/getInfo/${number}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
