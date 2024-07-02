@@ -97,3 +97,16 @@ DOCKER_VERSION=1.44
 
 This is still under development and not intended for production use.
 
+Update:2
+
+Some browser images to choose from: 
+```sh
+jlesage/firefox           latest    612MB   "https://github.com/jlesage/docker-firefox"
+mrcolorrain/vnc-browser   alpine    527MB   "https://github.com/MRColorR/vnc-browser"
+mrcolorrain/vnc-browser   debian      -     "https://github.com/MRColorR/vnc-browser"   
+kasmweb/chrome
+kasmweb/firefox
+kasmweb/edge
+kasmweb/brave
+kasmweb/chromium
+```

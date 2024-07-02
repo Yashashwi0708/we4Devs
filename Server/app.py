@@ -19,7 +19,8 @@ default_password = os.getenv("DEFAULT_PASSWORD")
 docker_url = os.getenv("DOCKER_URL")
 docker_version = os.getenv("DOCKER_VERSION")
 SERVER_URL = os.getenv("SERVER_URL")
-
+CONTAINER_BROWSER_PORT = os.getenv("CONTAINER_BROWSER_PORT")
+CONTAINER_EXPIRATION_TIME = os.getenv("CONTAINER_EXPIRATION_TIME")
 app = Flask(__name__)
 
 # Enable CORS
@@ -60,29 +61,27 @@ def start_container():
     if url is None:
         url = default_url
 
-    environment = {
-        "VNC_PW": password,
-        "LAUNCH_URL": url
-    }
+   
 
-    port_bindings = {6901: find_available_port(start_port, end_port)}
+    port_bindings = {CONTAINER_BROWSER_PORT: find_available_port(start_port, end_port)}
     print("[LOG] Ports: ", port_bindings)
     try:
         container = client.containers.run(
-            "kasmweb/chrome:1.14.0",
+            "jlesage/firefox",
             detach=True,
             ports=port_bindings,
-            environment=environment,
+            environment={
+                "FF_OPEN_URL": url
+            },
             shm_size='256m',
             auto_remove=True,
-            name = "chrome-container-"+str(port_bindings[6901])
+            name = "firefox-container-"+str(port_bindings[CONTAINER_BROWSER_PORT])
         )
         container_queue.append(container)
         
-        # Set timer to remove the container after 10 minutes (600 seconds)
-        Timer(600, remove_container, [container]).start()
+        Timer(CONTAINER_EXPIRATION_TIME, remove_container, [container]).start()
 
-        return jsonify({'status': 'Container started successfully', 'container_id': container.id, 'url': SERVER_URL+':'+str(port_bindings[6901])})
+        return jsonify({'status': 'Container started successfully', 'container_id': container.id, 'url': SERVER_URL+':'+str(port_bindings[CONTAINER_BROWSER_PORT])})
     except Exception as e:
         return jsonify({'status': 'Error', 'error_message': str(e)}), 500
 
