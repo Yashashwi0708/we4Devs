@@ -43,36 +43,23 @@ git clone https://github.com/yashashwi0708/we4Devs
 cd Frontend
 npm i
 npm run dev
+
+use .env file as Frontend/.env 
+VITE_HOST=http://localhost:5000
 ```
 Change the API's according to your **Backend** 
 
 <h1>Backend🌐</h1>
 
-Note: You can run the api, browser service(docker), and bots on different servers, ensuring that proper endpoints are provided and env variables are specified correctly. More changes are coming soon...
+Note: You can run the api and bots on different servers, ensuring that proper endpoints are provided and env variables are specified correctly. More changes are coming soon...
 
-##### To run the spam and browser service
+##### Backend
 ```sh
-cd SpamModel
-pip install requirements.txt
+cd Backend
+pip -r requirements.txt
 python app.py
 ```
 
-##### To start the backend API (along with whatsapp bot)
-```sh
-cd Backend
-npm i
-node main.js
-```
-
-##### To start the service for telegram and discord bot
-```sh
-cd Bots
-cd Discord
-node index.js
-
-cd Bots
-cd Telegram
-python main.py
 ```
 
 ##### Define a global .env file 
@@ -95,13 +82,24 @@ DOCKER_VERSION=1.44
 
 ```
 
+##### To start the service for telegram and discord bot
+```sh
+cd Bots
+cd Discord
+node index.js
+
+cd Bots
+cd Telegram
+python main.py
+
 This is still under development and not intended for production use.
 
 Update:2
 
 Some browser images to choose from: 
+
 ```sh
-jlesage/firefox           latest    612MB   "https://github.com/jlesage/docker-firefox"
+jlesage/firefox           latest    612MB   "https://github.com/jlesage/docker-firefox" //recommended
 mrcolorrain/vnc-browser   alpine    527MB   "https://github.com/MRColorR/vnc-browser"
 mrcolorrain/vnc-browser   debian      -     "https://github.com/MRColorR/vnc-browser"   
 kasmweb/chrome
