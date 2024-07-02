@@ -22,6 +22,7 @@ SERVER_URL = os.getenv("SERVER_URL")
 CONTAINER_BROWSER_PORT = os.getenv("CONTAINER_BROWSER_PORT")
 CONTAINER_EXPIRATION_TIME = os.getenv("CONTAINER_EXPIRATION_TIME")
 MAX_CONTAINERS = int(os.getenv("MAX_CONTAINERS"))
+CONTAINER_NAME_PREFIX = os.getenv("CONTAINER_NAME_PREFIX")
 app = Flask(__name__)
 
 # Enable CORS
@@ -46,7 +47,7 @@ def remove_container(container):
 # when server starts, remove all containers if present that start with "chrome-container"
 def remove_all_containers():
     for container in client.containers.list(all=True):
-        if container.name.startswith("chrome-container"):
+        if container.name.startswith(CONTAINER_NAME_PREFIX):
             remove_container(container)
 
             
@@ -84,7 +85,7 @@ def start_container():
             shm_size='512m',
             mem_limit='1024m',
             auto_remove=True,
-            name = "firefox-container-"+str(port_bindings[CONTAINER_BROWSER_PORT]),
+            name = CONTAINER_NAME_PREFIX+"-"+str(port_bindings[CONTAINER_BROWSER_PORT]),
             # devices=["/dev/snd"],
         )
         container_queue.append(container)
