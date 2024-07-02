@@ -60,25 +60,28 @@ pip -r requirements.txt
 python app.py
 ```
 
-```
 
 ##### Define a global .env file 
 ```sh
-
-API_URL= //huggingface hosted model
-API_KEY= //huggingface api key
-VERIFY_TOKEN=test
-DOCKER_URL= //where docker service is running example https://localhost:5000
-TC_KEY= //truecaller api key
-WA_API_KEY= //whatsapp meta api key
-WA_BASE_URL= //whatsapp message url
-
-START_PORT=6800 //start range for browser containers
-END_PORT=6900 //end range for browser containers
-DEFAULT_URL=https://www.google.com
+START_PORT=6800
+END_PORT=6900
+DEFAULT_URL=google.com
 DEFAULT_PASSWORD=password
-DOCKER_URL=unix://home/smit/.docker/desktop/docker.sock
+DOCKER_URL=unix:///var/run/docker.sock
 DOCKER_VERSION=1.44
+CONTAINER_BROWSER_PORT = 5800
+CONTAINER_EXPIRATION_TIME = 600
+MAX_CONTAINERS = 4
+
+API_URL=https://api-inference.huggingface.co/models/Titeiiko/OTIS-Official-Spam-Model //huggingface hosted model
+API_KEY=//huggingface api key
+SERVER_URL=http://localhost
+
+
+VERIFY_TOKEN=test
+TC_KEY=//truecaller api key
+WA_API_KEY=//whatsapp meta api key
+WA_BASE_URL=//whatsapp message url
 
 ```
 
@@ -91,6 +94,7 @@ node index.js
 cd Bots
 cd Telegram
 python main.py
+```
 
 This is still under development and not intended for production use.
 
