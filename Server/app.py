@@ -21,6 +21,7 @@ docker_version = os.getenv("DOCKER_VERSION")
 SERVER_URL = os.getenv("SERVER_URL")
 CONTAINER_BROWSER_PORT = os.getenv("CONTAINER_BROWSER_PORT")
 CONTAINER_EXPIRATION_TIME = os.getenv("CONTAINER_EXPIRATION_TIME")
+MAX_CONTAINERS = int(os.getenv("MAX_CONTAINERS"))
 app = Flask(__name__)
 
 # Enable CORS
@@ -51,17 +52,17 @@ def remove_all_containers():
             
 @app.route('/startContainer', methods=['GET'])
 def start_container():
-    if len(container_queue) >= 10:
-        return jsonify({'status': 'Quota full'}), 429
+    if len(container_queue) >= MAX_CONTAINERS:
+        return jsonify({'status': 'Error', 'error_message': 'Quota full' }), 429
     
     url = request.args.get('url')
     password = request.args.get('password')
-    if password is None:
-        password = default_password
-    if url is None:
-        url = default_url
 
-   
+    if password == None:
+        password = default_password
+    
+    if url == "" or url == None:
+        url = default_url
 
     port_bindings = {CONTAINER_BROWSER_PORT: find_available_port(start_port, end_port)}
     print("[LOG] Ports: ", port_bindings)
@@ -71,15 +72,24 @@ def start_container():
             detach=True,
             ports=port_bindings,
             environment={
-                "FF_OPEN_URL": url
+                "FF_OPEN_URL": url,
+                "VNC_LISTENING_PORT" : "-1",
+                "DARK_MODE" : "1",
+                # "SECURE_CONNECTION" : "1",
+                # "WEB_AUDIO" : "1", 
+                # "DISPLAY_HEIGHT" : "1080,
+                # "DISPLAY_WIDTH" : "1920",
+                # "FF_KIOSK" : "1", #if 1, then it will be full screen with no new tabs
             },
-            shm_size='256m',
+            shm_size='512m',
+            mem_limit='1024m',
             auto_remove=True,
-            name = "firefox-container-"+str(port_bindings[CONTAINER_BROWSER_PORT])
+            name = "firefox-container-"+str(port_bindings[CONTAINER_BROWSER_PORT]),
+            # devices=["/dev/snd"],
         )
         container_queue.append(container)
         
-        Timer(CONTAINER_EXPIRATION_TIME, remove_container, [container]).start()
+        Timer(int(CONTAINER_EXPIRATION_TIME), remove_container, [container]).start()
 
         return jsonify({'status': 'Container started successfully', 'container_id': container.id, 'url': SERVER_URL+':'+str(port_bindings[CONTAINER_BROWSER_PORT])})
     except Exception as e:
