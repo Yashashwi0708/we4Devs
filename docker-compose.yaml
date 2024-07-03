@@ -8,7 +8,7 @@ networks:
 
 services:
   backend:
-    image: we4devs-server
+    image: smitbutle/we4devs-server
     container_name: backend
     env_file: ./Server/.env
     expose:

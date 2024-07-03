@@ -83,9 +83,9 @@ def start_container():
                 # "DISPLAY_WIDTH" : "1920",
                 # "FF_KIOSK" : "1", #if 1, then it will be full screen with no new tabs
             },
+            remove=True,
             shm_size='512m',
             mem_limit='1024m',
-            auto_remove=True,
             name = CONTAINER_NAME_PREFIX+"-"+str(port_bindings[CONTAINER_BROWSER_PORT]),
             # devices=["/dev/snd"],
         )
