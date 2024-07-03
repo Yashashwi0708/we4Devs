@@ -3,7 +3,6 @@ import itisSpam from '../../../Assets/itisSpam.png';
 import './IsSpam.css';
 import axios from 'axios';
 import VBrowser from './../VirtualBrowser/VBrowser';
-import { search } from 'truecallerjs';
 
 const API_URL = import.meta.env.VITE_HOST;
 
