@@ -31,16 +31,18 @@ CORS(app, resources={r"/*": {"origins": "*"}})
 
 # Docker client
 client = DockerClient(base_url=docker_url, version=docker_version)
-container_queue = deque(maxlen=10)
+container_queue = deque(maxlen=MAX_CONTAINERS)
 
 
 def remove_container(container):
     try:
         container.stop()
         container.remove()
+        print(f"Container {container.name} removed successfully.")
     except Exception as e:
-        print(f"Error removing container: {str(e)}")
+        print(f"Error removing container {container.name}: {str(e)}")
     finally:
+        print(f"Removing container {container.name} from queue")
         if container in container_queue:
             container_queue.remove(container)
 
@@ -49,9 +51,13 @@ def remove_container(container):
 def remove_all_containers():
     for container in client.containers.list(all=True):
         if container.name.startswith(CONTAINER_NAME_PREFIX):
+            print(f"Removing container {container.name}")
             remove_container(container)
 
-            
+def callme():
+    container = container_queue.popleft()
+    return remove_container(container)
+
 @app.route('/startContainer', methods=['GET'])
 def start_container():
     if len(container_queue) >= MAX_CONTAINERS:
@@ -71,7 +77,6 @@ def start_container():
     try:
         container = client.containers.run(
             "jlesage/firefox",
-            detach=True,
             ports=port_bindings,
             environment={
                 "FF_OPEN_URL": url,
@@ -83,14 +88,15 @@ def start_container():
                 # "DISPLAY_WIDTH" : "1920",
                 # "FF_KIOSK" : "1", #if 1, then it will be full screen with no new tabs
             },
-            remove=True,
+            detach=True,
             shm_size='512m',
             mem_limit='1024m',
             name = CONTAINER_NAME_PREFIX+"-"+str(port_bindings[CONTAINER_BROWSER_PORT]),
             # devices=["/dev/snd"],
         )
         container_queue.append(container)
-        
+        print(f"Container {container.name} started successfully")
+        Timer(10, callme, []).start()
         Timer(int(CONTAINER_EXPIRATION_TIME), remove_container, [container]).start()
 
         return jsonify({'status': 'Container started successfully', 'container_id': container.id, 'url': SERVER_URL+':'+str(port_bindings[CONTAINER_BROWSER_PORT])})
