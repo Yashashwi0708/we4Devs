@@ -1,0 +1,33 @@
+networks:
+  we4devs-network:
+    driver: bridge
+
+services:
+  backend:
+    image: we4devs-server
+    container_name: backend
+    env_file: .env
+    expose:
+      - 6273
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    restart: unless-stopped
+    networks:
+      - we4devs-network
+
+  frontend:
+    build:
+      context: ./frontend
+      args:
+        - VITE_HOST=http://backend:6273
+    container_name: frontend
+    environment:
+      - VITE_HOST=http://backend:6273
+    ports:
+      - "6173:80"
+    depends_on:
+      - backend
+    restart: unless-stopped
+    networks:
+      - we4devs-network
+

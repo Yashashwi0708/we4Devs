@@ -12,6 +12,7 @@ from collections import deque
 
 load_dotenv()
 
+running_port = os.getenv("PORT")
 start_port = int(os.getenv("START_PORT"))
 end_port = int(os.getenv("END_PORT"))
 default_url = os.getenv("DEFAULT_URL")
@@ -141,4 +142,4 @@ def home():
 
 if __name__ == '__main__':
     remove_all_containers()
-    app.run(debug=True)
+    app.run(debug=True, port=int(running_port), host='0.0.0.0')
