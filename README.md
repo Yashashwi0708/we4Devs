@@ -112,3 +112,7 @@ kasmweb/edge
 kasmweb/brave
 kasmweb/chromium
 ```
+
+Update:3
+
+Support for docker >=1.24. Lower versions might also be supported, testing in progress.

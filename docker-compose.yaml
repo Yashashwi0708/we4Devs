@@ -1,9 +1,6 @@
 networks:
   we4devs-network:
     driver: bridge
-    ipam:
-      config:
-        - subnet: 172.22.0.0/24
 
 
 services:
@@ -11,23 +8,22 @@ services:
     image: smitbutle/we4devs-server
     container_name: backend
     env_file: ./Server/.env
-    expose:
-      - 6273
+    ports:
+      - "6273:6273"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     restart: unless-stopped
     networks:
-      we4devs-network:
-        ipv4_address: 172.22.0.10
+      - we4devs-network
 
   frontend:
     build:
       context: ./Frontend
       args:
-        - VITE_HOST=http://172.22.0.10:6273
+        - VITE_HOST=http://0.0.0.0:6273
     container_name: frontend
     environment:
-      - VITE_HOST=http://172.22.0.10:6273
+      - VITE_HOST=http://0.0.0.0:6273
     ports:
       - "6173:5200"
     depends_on:
