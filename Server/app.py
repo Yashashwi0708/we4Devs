@@ -7,7 +7,7 @@ from threading import Timer
 
 import os
 
-from utils import get_info, query, find_available_port
+from utils import get_info, query
 from collections import deque
 
 load_dotenv()
@@ -72,7 +72,7 @@ def start_container():
     if url == "" or url == None:
         url = default_url
 
-    port_bindings = {CONTAINER_BROWSER_PORT: find_available_port(start_port, end_port)}
+    port_bindings = {CONTAINER_BROWSER_PORT: 6800 + len(container_queue)}
     print("[LOG] Ports: ", port_bindings)
     try:
         container = client.containers.run(
@@ -86,18 +86,17 @@ def start_container():
                 # "WEB_AUDIO" : "1", 
                 # "DISPLAY_HEIGHT" : "1080,
                 # "DISPLAY_WIDTH" : "1920",
-                # "FF_KIOSK" : "1", #if 1, then it will be full screen with no new tabs
+                "FF_KIOSK" : "1", #if 1, then it will be full screen with no new tabs
             },
             detach=True,
             shm_size='512m',
-            mem_limit='1024m',
+            mem_limit='1536m',
             name = CONTAINER_NAME_PREFIX+"-"+str(port_bindings[CONTAINER_BROWSER_PORT]),
             # devices=["/dev/snd"],
         )
         container_queue.append(container)
         print(f"Container {container.name} started successfully")
-        Timer(10, callme, []).start()
-        Timer(int(CONTAINER_EXPIRATION_TIME), remove_container, [container]).start()
+        Timer(int(CONTAINER_EXPIRATION_TIME), callme, []).start()
 
         return jsonify({'status': 'Container started successfully', 'container_id': container.id, 'url': SERVER_URL+':'+str(port_bindings[CONTAINER_BROWSER_PORT])})
     except Exception as e:

@@ -8,16 +8,20 @@ API_URL = os.getenv("API_URL")
 API_KEY = os.getenv("API_KEY")
 TC_KEY = os.getenv('TC_KEY')
 
+# i=0
+# def find_available_port():
+#     global i
+#     i+=1
+#     return 6300+i%4
+    # for port in range(start_port, end_port + 1):
+    #     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+    #         try:
+    #             s.bind(("", port))
+    #             return port
+    #         except OSError:
+    #             continue
+    # raise Exception(f"No available ports found in range {start_port}-{end_port}")
 
-def find_available_port(start_port, end_port):
-    for port in range(start_port, end_port + 1):
-        with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
-            try:
-                s.bind(("", port))
-                return port
-            except OSError:
-                continue
-    raise Exception(f"No available ports found in range {start_port}-{end_port}")
 
 
 
